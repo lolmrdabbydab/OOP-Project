@@ -5,11 +5,13 @@
 class Item:public Printable{
     private:
         int numberOfItems;
+        double price;
     public: 
         Item();
+        Item(int n,double p);
         int getNumberOfItems();
         void setNumberOfItems(int n);
-        ~Item();
-}
+        void changeAmount(int n);
+};
 
 #endif

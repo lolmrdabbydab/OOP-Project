@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Store.h"
 
-Store::Store(): Store(1,30,5.0,0,0,0,0,0,0,0)
+Store::Store(): Store(1,30.0,5.0,0,0,0,0,0,0)
 {
     
 }
@@ -31,6 +31,20 @@ return rating;
 void Store::setRating(double r)
 {
     rating = r;
+}
+
+int Store::getDay()
+{
+    return currentDay ;
+}
+
+Item **Store::getItems()
+{
+    return items;
+}
+
+Store::~Store()
+{
 }
 
 void Store::print()

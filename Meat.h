@@ -5,5 +5,7 @@
 class Meat:public Item{
     private:
     public: 
-}
+        Meat(int n,double p);
+        void print();
+};
 #endif
