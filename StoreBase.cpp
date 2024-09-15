@@ -1,5 +1,6 @@
 #include "StoreBase.h"
 #include <iostream>
+#include "Item.h"
 #include "Egg.h"
 #include "Milk.h"
 #include "Meat.h"
@@ -7,12 +8,12 @@ StoreBase::StoreBase():StoreBase(0,0,0,0,0,0){};
 StoreBase::StoreBase(int i0,int i1, int i2, int i3,int i4,int i5){
     numberOfItemtypes = 6;
     items = new Item*[numberOfItemtypes];
-    Item* cagedEgg  =new Egg(5,true,i0);
-    Item*   freeRangeEgg =new Egg(8,false,i1);
-    Item* cowMilk = new Milk(4,"Cow",i2);
-    Item* plantBasedMilk =new Milk(4,"Almond",i3);
-    Item* beef =new Meat(15,i4);
-    Item* chicken =new Meat(10,i5);
+    Item* cagedEgg  =new Egg(i0,true,5);
+    Item* freeRangeEgg =new Egg(i1,false,8);
+    Item* cowMilk = new Milk(i2,"Cow",4);
+    Item* plantBasedMilk =new Milk(i3,"Almond",4);
+    Item* beef =new Meat(i4,15);
+    Item* chicken =new Meat(i5,10);
     items[0] = cagedEgg;
     items[1] = freeRangeEgg;
     items[2] = cowMilk;

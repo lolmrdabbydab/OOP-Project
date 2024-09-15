@@ -11,7 +11,7 @@
 #include "Milk.h"
 
 int main(){
-    std::cout<<"Welcome to Retail Simulator game";
+    std::cout<<"Welcome to Retail Simulator game"<<std::endl;
     bool running  = true;
     std::ifstream ReadFile("data.txt");
     std::string haveAccount;
@@ -36,47 +36,57 @@ int main(){
     ReadFile.close();
     double target=10;
     int currentDay = s.getDay();
-    Suppliant suppliant;
+    std::cout<<currentDay<<std::endl;
+    Suppliant suppliant = Suppliant();
     int numberOfCus = 2;
     while (running){
+        std::cout<<numberOfCus<<std::endl;
         numberOfCus+= currentDay/5;
+        std::cout<<currentDay<<std::endl;
+        std::cout<<numberOfCus<<std::endl;
         int balance = s.getBalance();
         double rating = s.getRating();
         double* costsItems = suppliant.getCurrentCost();
-        std::cout<<"Buying goods for a new day "<<currentDay<<std::endl;
+        std::cout<<"Buying goods for day "<<currentDay<<std::endl;
         std::cout<<"*******************"<<std::endl;
         suppliant.print();
         while (true){
             std::cout<<"Please choose items to buy(1-6): ";
             int n;
             std::cin>>n;
-            if (n>6 || n<0){
+            if (n>6 || n<1){
                 break;
             }
             std::cout<<"How many items do you want to buy? ";
             int amount;
             std::cin>>amount;
-            if (amount * costsItems[n]>balance){
+            if (amount * costsItems[n-1]>balance){
                 std::cout<<"Not enough money"<<std::endl;
             }
             else{
-                balance -=amount*costsItems[n];
-                s.getItems()[n]->changeAmount(amount);
+                balance -=amount*costsItems[n-1];
+                s.getItems()[n-1];
+                std::cout<<balance<<std::endl;
             }
             
 
         }
         for (int i =0;i<numberOfCus;i++){
-            int n = rand()%currentDay;
+            int n = rand()%currentDay+1;
             int good = rand()%6;
-            std::cout<<"Customer "<<i<< " want to buy " <<n<<suppliant.getNameItems()[good];
-            if (s.getItems()[good]->getNumberOfItems()*costsItems[good]<n){
+            std::cout<<"Customer "<<i+1<< " want to buy " <<n<<" "<<suppliant.getNameItems()[good]<<std::endl;
+            if (s.getItems()[good]->getNumberOfItems()<n){
+                std::cout<<1<<std::endl;
                 rating -= 0.5*(n-s.getItems()[good]->getNumberOfItems());
-                balance += costsItems[good]*(n-s.getItems()[good]->getNumberOfItems());
-                s.getItems()[good]->setNumberOfItems(0);
+                std::cout<<2<<std::endl;
+                balance += costsItems[good]*(s.getItems()[good]->getNumberOfItems());
+                std::cout<<3<<std::endl;
+                s.getItems()[good];
+                //->setNumberOfItems(0);
+                std::cout<<4<<std::endl;
             }
             else{
-                balance += s.getItems()[good]->getNumberOfItems()*costsItems[good];
+                balance += n*s.getItems()[good]->getPrice();
                 s.getItems()[good]->changeAmount(-n);
                 rating += 0.3 ;
                 if (rating >5){
@@ -85,7 +95,7 @@ int main(){
             }
             std::cout<<"Balance: "<<balance<<std::endl;
             std::cout<<"Rating: "<<rating<<std::endl;
-            sleep(1);
+            sleep(2);
         }
         if (balance<target || rating <=0){
             std::ofstream MyFile("data.txt");
@@ -99,6 +109,7 @@ int main(){
             std::cout<<"1. Play the next day"<<std::endl;
             std::cout<<"2. Save and exit"<<std::endl;
             int choice;
+            std::cin>>choice;
             if (choice ==1){
                 continue;
             }
@@ -112,8 +123,10 @@ int main(){
                     MyFile<<c[i]->getNumberOfItems();
                 }
                 MyFile.close();
+                running = false;
             }
         }
+        suppliant.updateCost();
         currentDay+=1;
         target += currentDay+5*(currentDay/5);
 

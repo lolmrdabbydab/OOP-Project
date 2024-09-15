@@ -8,7 +8,6 @@ class Store:public StoreBase{
         int currentDay;
         double balance;
         double rating;
-        Item** items;
     public:
         Store();
         Store(int currentDay,double b, double r,int i0,int i1,int i2, int i3,int i4,int i5);
@@ -17,7 +16,6 @@ class Store:public StoreBase{
         double getRating();
         void setRating(double r);
         int getDay();
-        Item** getItems();
         ~Store();
         void print();
 };

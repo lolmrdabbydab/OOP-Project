@@ -8,6 +8,12 @@ Suppliant::Suppliant()
     costs[3] = 3.5;
     costs[4] = 14;
     costs[5] = 9;
+    currentCosts[0] = 4;
+    currentCosts[1] = 7;
+    currentCosts[2] = 3.5;
+    currentCosts[3] = 3.5;
+    currentCosts[4] = 14;
+    currentCosts[5] = 9;
 
 }
 
@@ -24,7 +30,7 @@ void Suppliant::print()
     std::cout<<"Costs of goods today"<<std::endl;
     std::cout<<"********************"<<std::endl;
     for (int i =0;i<6;i++){
-        std::cout<<i<<". "<<nameItems[i]<<":"<<currentCosts<<std::endl;
+        std::cout<<i+1<<". "<<nameItems[i]<<":"<<currentCosts[i]<<std::endl;
     }
 }
 

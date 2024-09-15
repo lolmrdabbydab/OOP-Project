@@ -9,6 +9,7 @@ class Item:public Printable{
     public: 
         Item();
         Item(int n,double p);
+        double getPrice();
         int getNumberOfItems();
         void setNumberOfItems(int n);
         void changeAmount(int n);

@@ -5,10 +5,13 @@ Item::Item():Item(0,0)
 }
 
 
-Item::Item(int n, double p)
+Item::Item(int n, double p):price(p),numberOfItems(n)
 {
-    price = p;
-    numberOfItems = n;
+}
+
+double Item::getPrice()
+{
+    return price;
 }
 
 int Item::getNumberOfItems()
