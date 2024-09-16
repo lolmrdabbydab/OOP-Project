@@ -115,12 +115,11 @@ int main(){
             else{
                 std::ofstream MyFile("data.txt");
                 MyFile<<1<<std::endl;
-                MyFile<<currentDay<<std::endl;
+                MyFile<<currentDay+1<<std::endl;
                 MyFile<<balance<<std::endl;
                 MyFile<<rating<<std::endl;
-                currentDay+=1;
                 target += currentDay+5*(currentDay/5);
-                MyFile<<currentDay<<std::endl;
+                MyFile<<numberOfCus<<std::endl;
                 MyFile<<target<<std::endl;
                 for (int i =0;i<6;i++){
                     MyFile<<s.getItems()[i]->getNumberOfItems()<<std::endl;
