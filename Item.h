@@ -7,7 +7,6 @@ class Item:public Printable{
         int numberOfItems;
         double price;
     public: 
-        Item();
         Item(int n,double p);
         double getPrice();
         int getNumberOfItems();

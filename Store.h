@@ -8,14 +8,18 @@ class Store:public StoreBase{
         int currentDay;
         double balance;
         double rating;
+        int numOfcus;
+        double target;
     public:
         Store();
-        Store(int currentDay,double b, double r,int i0,int i1,int i2, int i3,int i4,int i5);
+        Store(int currentDay,double b, double r,int c,double t,int i0,int i1,int i2, int i3,int i4,int i5);
         double getBalance();
         void setBalance(double b);
         double getRating();
         void setRating(double r);
         int getDay();
+        double getTarget();
+        int getNumCus();
         ~Store();
         void print();
 };

@@ -1,5 +1,6 @@
 #include "Suppliant.h"
 #include <stdlib.h>
+#include <ctime>
 Suppliant::Suppliant()
 {
     costs[0] = 4;
@@ -19,8 +20,9 @@ Suppliant::Suppliant()
 
 void Suppliant::updateCost()
 {
+    std::srand(std::time(nullptr));
     for (int i =0;i<6;i++){
-        double rateChange = 0.5+(rand()%10)/10 ;
+        double rateChange = 0.5+(std::rand()%10)/10.0 ;
         currentCosts[i] = costs[i] *rateChange;
     }
 }

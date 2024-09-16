@@ -6,8 +6,6 @@
 #include "Meat.h"
 StoreBase::StoreBase():StoreBase(0,0,0,0,0,0){};
 StoreBase::StoreBase(int i0,int i1, int i2, int i3,int i4,int i5){
-    numberOfItemtypes = 6;
-    items = new Item*[numberOfItemtypes];
     Item* cagedEgg  =new Egg(i0,true,5);
     Item* freeRangeEgg =new Egg(i1,false,8);
     Item* cowMilk = new Milk(i2,"Cow",4);
@@ -40,5 +38,4 @@ StoreBase::~StoreBase()
     for (int i=0; i<numberOfItemtypes;i++){
         delete items[i];
     }
-    delete []items;
 }

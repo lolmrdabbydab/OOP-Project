@@ -1,10 +1,5 @@
 #include "Item.h"
 
-Item::Item():Item(0,0)
-{
-}
-
-
 Item::Item(int n, double p):price(p),numberOfItems(n)
 {
 }
@@ -16,7 +11,7 @@ double Item::getPrice()
 
 int Item::getNumberOfItems()
 {
-    return 0;
+    return numberOfItems;
 }
 
 void Item::setNumberOfItems(int n)
@@ -26,5 +21,5 @@ void Item::setNumberOfItems(int n)
 
 void Item::changeAmount(int n)
 {
-    numberOfItems += n;
+    numberOfItems+=n;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
+#include <ctime>
 #include "Printable.h"
 #include "StoreBase.h"
 #include "Store.h"
@@ -10,43 +11,46 @@
 #include "Meat.h"
 #include "Milk.h"
 
+//g++ main.cpp Printable.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp Milk.cpp Meat.cpp Egg.cpp -o a
 int main(){
     std::cout<<"Welcome to Retail Simulator game"<<std::endl;
     bool running  = true;
     std::ifstream ReadFile("data.txt");
     std::string haveAccount;
     std::getline(ReadFile, haveAccount);
-    std::string i0,i1,i2,i3,i4,i5,curDay,balance,r;
+    std::string i0,i1,i2,i3,i4,i5,curDay,b,r,c,t;
     Store s;
     if (haveAccount=="1"){
         std::getline(ReadFile, curDay);
-        std::getline(ReadFile, balance);
+        std::getline(ReadFile, b);
         std::getline(ReadFile, r);
+        std::getline(ReadFile,c);
+        std::getline(ReadFile,t);
         std::getline(ReadFile, i0);
         std::getline(ReadFile, i1);
         std::getline(ReadFile, i2);
         std::getline(ReadFile, i3);
         std::getline(ReadFile, i4);
         std::getline(ReadFile, i5);
-        s = Store(std::stoi(curDay),std::stod(balance),std::stod(r),std::stoi(i0),std::stoi(i1),std::stoi(i2),std::stoi(i3),std::stoi(i4),std::stoi(i5)); 
+        s = Store(std::stoi(curDay),std::stod(b),std::stod(r),std::stoi(c),std::stod(t),std::stoi(i0),std::stoi(i1),std::stoi(i2),std::stoi(i3),std::stoi(i4),std::stoi(i5)); 
     }
     else{
         s =Store();
     }
     ReadFile.close();
-    double target=10;
+    double target = s.getTarget();
     int currentDay = s.getDay();
-    std::cout<<currentDay<<std::endl;
     Suppliant suppliant = Suppliant();
-    int numberOfCus = 2;
+    int numberOfCus = s.getNumCus();
+    double balance = s.getBalance();
+    double rating = s.getRating();
     while (running){
-        std::cout<<numberOfCus<<std::endl;
+        std::srand(std::time(nullptr));
+        std::cout<<"Welcome to day "<<currentDay<<std::endl;
+        std::cout<<"Target: "<<target<<std::endl;
         numberOfCus+= currentDay/5;
-        std::cout<<currentDay<<std::endl;
-        std::cout<<numberOfCus<<std::endl;
-        int balance = s.getBalance();
-        double rating = s.getRating();
-        double* costsItems = suppliant.getCurrentCost();
+        double* costsItems = new double[6];
+        costsItems = suppliant.getCurrentCost();
         std::cout<<"Buying goods for day "<<currentDay<<std::endl;
         std::cout<<"*******************"<<std::endl;
         suppliant.print();
@@ -65,25 +69,21 @@ int main(){
             }
             else{
                 balance -=amount*costsItems[n-1];
-                s.getItems()[n-1];
+                s.getItems()[n-1]->changeAmount(amount);
                 std::cout<<balance<<std::endl;
             }
             
 
         }
+        sleep(2);
         for (int i =0;i<numberOfCus;i++){
-            int n = rand()%currentDay+1;
-            int good = rand()%6;
-            std::cout<<"Customer "<<i+1<< " want to buy " <<n<<" "<<suppliant.getNameItems()[good]<<std::endl;
+            int n = std::rand()%currentDay+1;
+            int good = std::rand()%6;
+            std::cout<<"\nCustomer "<<i+1<< " want to buy " <<n<<" "<<suppliant.getNameItems()[good]<<std::endl;
             if (s.getItems()[good]->getNumberOfItems()<n){
-                std::cout<<1<<std::endl;
                 rating -= 0.5*(n-s.getItems()[good]->getNumberOfItems());
-                std::cout<<2<<std::endl;
                 balance += costsItems[good]*(s.getItems()[good]->getNumberOfItems());
-                std::cout<<3<<std::endl;
-                s.getItems()[good];
-                //->setNumberOfItems(0);
-                std::cout<<4<<std::endl;
+                s.getItems()[good]->setNumberOfItems(0);
             }
             else{
                 balance += n*s.getItems()[good]->getPrice();
@@ -111,19 +111,24 @@ int main(){
             int choice;
             std::cin>>choice;
             if (choice ==1){
-                continue;
             }
             else{
                 std::ofstream MyFile("data.txt");
-                std::cout<<"Saved successfully!!!"<<std::endl;
-                MyFile<<1;
-                MyFile<<currentDay;
-                Item** c= s.getItems();
+                MyFile<<1<<std::endl;
+                MyFile<<currentDay<<std::endl;
+                MyFile<<balance<<std::endl;
+                MyFile<<rating<<std::endl;
+                currentDay+=1;
+                target += currentDay+5*(currentDay/5);
+                MyFile<<currentDay<<std::endl;
+                MyFile<<target<<std::endl;
                 for (int i =0;i<6;i++){
-                    MyFile<<c[i]->getNumberOfItems();
+                    MyFile<<s.getItems()[i]->getNumberOfItems()<<std::endl;
                 }
                 MyFile.close();
                 running = false;
+                std::cout<<"Saved successfully!!!"<<std::endl;
+
             }
         }
         suppliant.updateCost();
@@ -131,7 +136,6 @@ int main(){
         target += currentDay+5*(currentDay/5);
 
     }
-
 
     
     return 0;
