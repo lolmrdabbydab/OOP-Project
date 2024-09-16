@@ -35,7 +35,8 @@ std::string *StoreBase::getNameItems()
 
 StoreBase::~StoreBase()
 {
-    for (int i=0; i<numberOfItemtypes;i++){
-        delete items[i];
-    }
+    // for (int i=0; i<numberOfItemtypes;i++){
+    //     std::cout<<i<<std::endl;
+    //     delete items[i];
+    // }
 }
