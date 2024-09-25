@@ -21,8 +21,8 @@ public:
     StoreBase(int i0, int i1, int i2, int i3, int i4, int i5);
     
     // Getters
-    Item **getItems();
-    std::string *getNameItems();
+    Item **get_Items();
+    std::string *get_NameItems();
 
     // Methods
     virtual void print();

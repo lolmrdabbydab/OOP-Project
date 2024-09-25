@@ -46,12 +46,12 @@ int main()
     }
     ReadFile.close();
 
-    double target = s.getTarget();
-    int currentDay = s.getDay();
+    double target = s.get_Target();
+    int currentDay = s.get_Day();
     Suppliant suppliant = Suppliant();
-    int numberOfCus = s.getNumCus();
-    double balance = s.getBalance();
-    double rating = s.getRating();
+    int numberOfCus = s.get_NumCus();
+    double balance = s.get_Balance();
+    double rating = s.get_Rating();
 
     while (running)
     {
@@ -61,7 +61,7 @@ int main()
 
         numberOfCus += currentDay / 5;
         double *costsItems = new double[6];
-        costsItems = suppliant.getCurrentCost();
+        costsItems = suppliant.get_CurrentCost();
 
         std::cout << "Buying goods for day " << currentDay << std::endl;
         std::cout << "*******************" << std::endl;
@@ -93,7 +93,7 @@ int main()
             else
             {
                 balance -= amount * costsItems[n - 1];
-                s.getItems()[n - 1]->changeAmount(amount);
+                s.get_Items()[n - 1]->changeAmount(amount);
                 std::cout << balance << std::endl;
             }
         }
@@ -105,19 +105,19 @@ int main()
             int n = std::rand() % currentDay + 1;
             int good = std::rand() % 6;
 
-            std::cout << "\nCustomer " << i + 1 << " want to buy " << n << " " << suppliant.getNameItems()[good] << std::endl;
+            std::cout << "\nCustomer " << i + 1 << " want to buy " << n << " " << suppliant.get_NameItems()[good] << std::endl;
 
-            if (s.getItems()[good]->getNumberOfItems() < n)
+            if (s.get_Items()[good]->get_numItems() < n)
             {
-                rating -= 0.5 * (n - s.getItems()[good]->getNumberOfItems());
-                balance += costsItems[good] * (s.getItems()[good]->getNumberOfItems());
-                s.getItems()[good]->setNumberOfItems(0);
+                rating -= 0.5 * (n - s.get_Items()[good]->get_numItems());
+                balance += costsItems[good] * (s.get_Items()[good]->get_numItems());
+                s.get_Items()[good]->setnumItems(0);
             }
 
             else
             {
-                balance += n * s.getItems()[good]->getPrice();
-                s.getItems()[good]->changeAmount(-n);
+                balance += n * s.get_Items()[good]->get_Price();
+                s.get_Items()[good]->changeAmount(-n);
                 rating += 0.3;
 
                 if (rating > 5)
@@ -163,7 +163,7 @@ int main()
 
                 for (int i = 0; i < 6; i++)
                 {
-                    MyFile << s.getItems()[i]->getNumberOfItems() << std::endl;
+                    MyFile << s.get_Items()[i]->get_numItems() << std::endl;
                 }
 
                 MyFile.close();

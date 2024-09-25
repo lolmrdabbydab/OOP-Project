@@ -7,15 +7,15 @@ Store::Store(int currentDay, double b, double r, int c, double t, int i0, int i1
 Store::Store() : Store(1, 30.0, 5.0, 1, 10, 0, 0, 0, 0, 0, 0) {}
 
 // Getters
-double Store::getBalance() { return balance; }
+double Store::get_Balance() { return balance; }
 
-double Store::getRating() { return rating; }
+double Store::get_Rating() { return rating; }
 
-int Store::getDay() { return currentDay; }
+int Store::get_Day() { return currentDay; }
 
-double Store::getTarget() { return target; }
+double Store::get_Target() { return target; }
 
-int Store::getNumCus() { return numOfcus; }
+int Store::get_NumCus() { return numOfcus; }
 
 // Setters
 void Store::setBalance(double b) { balance = b; }

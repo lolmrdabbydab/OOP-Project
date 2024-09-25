@@ -7,7 +7,7 @@
 class Item : public Printable
 {
 private:
-    int numberOfItems;
+    int numItems;
     double price;
 
 public:
@@ -15,11 +15,11 @@ public:
     Item(int n, double p);
     
     // Getters
-    double getPrice();
-    int getNumberOfItems();
+    double get_Price();
+    int get_numItems();
 
     // Setters
-    void setNumberOfItems(int n);
+    void setnumItems(int n);
 
     // Methods
     void changeAmount(int n);

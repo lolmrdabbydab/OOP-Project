@@ -22,7 +22,7 @@ Suppliant::Suppliant()
 }
 
 // Getters
-double *Suppliant::getCurrentCost() { return currentCosts; }
+double *Suppliant::get_CurrentCost() { return currentCosts; }
 
 // Methods
 void Suppliant::updateCost()

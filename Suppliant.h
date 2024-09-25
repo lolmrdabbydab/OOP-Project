@@ -15,7 +15,7 @@ public:
     Suppliant();
 
     // Getters
-    double *getCurrentCost();
+    double *get_CurrentCost();
 
     // Methods
     void updateCost();

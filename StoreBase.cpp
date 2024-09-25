@@ -26,12 +26,12 @@ StoreBase::StoreBase(int i0, int i1, int i2, int i3, int i4, int i5)
 StoreBase::StoreBase() : StoreBase(0, 0, 0, 0, 0, 0) {};
 
 // Getters
-Item **StoreBase::getItems()
+Item **StoreBase::get_Items()
 {
     return items;
 }
 
-std::string *StoreBase::getNameItems()
+std::string *StoreBase::get_NameItems()
 {
     return nameItems;
 }

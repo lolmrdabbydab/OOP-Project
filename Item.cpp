@@ -1,15 +1,15 @@
 #include "Item.h"
 
 // Constructors
-Item::Item(int n, double p) : price(p), numberOfItems(n) {}
+Item::Item(int n, double p) : price(p), numItems(n) {}
 
 // Getters
-double Item::getPrice() { return price; }
+double Item::get_Price() { return price; }
 
-int Item::getNumberOfItems() { return numberOfItems; }
+int Item::get_numItems() { return numItems; }
 
 // Setters
-void Item::setNumberOfItems(int n) { numberOfItems = n; }
+void Item::setnumItems(int n) { numItems = n; }
 
 // Methods
-void Item::changeAmount(int n) { numberOfItems += n; }
+void Item::changeAmount(int n) { numItems += n; }

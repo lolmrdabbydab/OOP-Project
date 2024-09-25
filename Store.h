@@ -21,11 +21,11 @@ public:
     Store(int currentDay, double b, double r, int c, double t, int i0, int i1, int i2, int i3, int i4, int i5);
     
     // Getters
-    int getDay();
-    int getNumCus();
-    double getBalance();
-    double getRating();
-    double getTarget();
+    int get_Day();
+    int get_NumCus();
+    double get_Balance();
+    double get_Rating();
+    double get_Target();
     
     // Setters
     void setBalance(double b);
