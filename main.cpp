@@ -46,12 +46,12 @@ int main()
     }
     ReadFile.close();
 
-    double target = s.get_Target();
-    int currentDay = s.get_Day();
+    double target = s.get_target();
+    int currentDay = s.get_day();
     Suppliant suppliant = Suppliant();
-    int numberOfCus = s.get_NumCus();
-    double balance = s.get_Balance();
-    double rating = s.get_Rating();
+    int numberOfCus = s.get_numCustomer();
+    double balance = s.get_balance();
+    double rating = s.get_rating();
 
     while (running)
     {
@@ -70,7 +70,7 @@ int main()
 
         while (true)
         {
-            std::cout << "Please choose items to buy(1-6): ";
+            std::cout << "Please choose items to buy (1-6): ";
 
             int n;
             std::cin >> n;
@@ -80,7 +80,7 @@ int main()
                 break;
             }
 
-            std::cout << "How many items do you want to buy? ";
+            std::cout << "Number of items you want to buy: ";
 
             int amount;
             std::cin >> amount;

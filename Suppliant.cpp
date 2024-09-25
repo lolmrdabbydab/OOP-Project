@@ -43,7 +43,7 @@ void Suppliant::print()
     
     for (int i = 0; i < 6; i++)
     {
-        std::cout << i + 1 << ". " << nameItems[i] << ":" << currentCosts[i] << std::endl;
+        std::cout << i + 1 << ". " << nameItems[i] << ": $" << currentCosts[i] << std::endl;
     }
 }
 
