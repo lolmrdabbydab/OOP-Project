@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+// Pure Abstract Class
 class Printable
 {
 public:
