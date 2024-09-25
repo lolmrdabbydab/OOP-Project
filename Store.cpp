@@ -18,9 +18,9 @@ double Store::get_Target() { return target; }
 int Store::get_NumCus() { return numOfcus; }
 
 // Setters
-void Store::setBalance(double b) { balance = b; }
+void Store::set_Balance(double b) { balance = b; }
 
-void Store::setRating(double r) { rating = r; }
+void Store::set_Rating(double r) { rating = r; }
 
 // Methods
 void Store::print() {}

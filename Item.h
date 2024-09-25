@@ -19,7 +19,7 @@ public:
     int get_numItems();
 
     // Setters
-    void setnumItems(int n);
+    void set_numItems(int n);
 
     // Methods
     void changeAmount(int n);

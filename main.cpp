@@ -111,7 +111,7 @@ int main()
             {
                 rating -= 0.5 * (n - s.get_Items()[good]->get_numItems());
                 balance += costsItems[good] * (s.get_Items()[good]->get_numItems());
-                s.get_Items()[good]->setnumItems(0);
+                s.get_Items()[good]->set_numItems(0);
             }
 
             else

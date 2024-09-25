@@ -28,8 +28,8 @@ public:
     double get_Target();
     
     // Setters
-    void setBalance(double b);
-    void setRating(double r);
+    void set_Balance(double b);
+    void set_Rating(double r);
     
     // Methods
     void print();

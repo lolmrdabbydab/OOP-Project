@@ -9,7 +9,7 @@ double Item::get_Price() { return price; }
 int Item::get_numItems() { return numItems; }
 
 // Setters
-void Item::setnumItems(int n) { numItems = n; }
+void Item::set_numItems(int n) { numItems = n; }
 
 // Methods
 void Item::changeAmount(int n) { numItems += n; }
