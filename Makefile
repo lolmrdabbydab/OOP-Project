@@ -13,10 +13,10 @@ create-%:
 	@touch $*.h $*.cpp
 
 # Rule to compile and run
-#run: 
-#	clang++ -std=c++17  -o a
-#	@./a
-#	@rm a
+run: 
+	clang++ -std=c++17 main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp Milk.cpp Meat.cpp Egg.cpp -o a
+	@./a
+	@rm a
 
 push:
 	git add .

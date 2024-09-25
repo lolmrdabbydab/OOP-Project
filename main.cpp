@@ -126,7 +126,7 @@ int main()
                 }
             }
 
-            std::cout << "Balance: " << balance << std::endl;
+            std::cout << "Balance: $" << balance << std::endl;
             std::cout << "Rating: " << rating << std::endl;
 
             sleep(2);
