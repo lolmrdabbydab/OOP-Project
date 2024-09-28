@@ -26,26 +26,17 @@ StoreBase::StoreBase(int i0, int i1, int i2, int i3, int i4, int i5)
 StoreBase::StoreBase() : StoreBase(0, 0, 0, 0, 0, 0) {};
 
 // Getters
-Item **StoreBase::get_Items()
-{
-    return items;
-}
+Item **StoreBase::get_Items() { return items; }
 
-std::string *StoreBase::get_NameItems()
-{
-    return nameItems;
-}
+std::string *StoreBase::get_NameItems() { return nameItems; }
 
 // Methods
-void StoreBase::print()
-{
-    return;
-}
+void StoreBase::print() { return; }
 
 // Destructors
 StoreBase::~StoreBase()
 {
-    // for (int i=0; i<numberOfItemtypes;i++){
+    // for (int i=0; i<numDifferentItem;i++){
     //     std::cout<<i<<std::endl;
     //     delete items[i];
     // }

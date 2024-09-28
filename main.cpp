@@ -40,6 +40,7 @@ int main()
 
         s = Store(std::stoi(curDay), std::stod(b), std::stod(r), std::stoi(c), std::stod(t), std::stoi(i0), std::stoi(i1), std::stoi(i2), std::stoi(i3), std::stoi(i4), std::stoi(i5));
     }
+    
     else
     {
         s = Store();
