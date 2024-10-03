@@ -36,6 +36,6 @@ public:
 
     // Destructor
     virtual ~Item();
-}
+};
 
 #endif
