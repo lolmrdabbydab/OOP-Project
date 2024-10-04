@@ -22,8 +22,8 @@ private:
     Egg();
 
     // Getters
-    string get_fromAnimal();
-    string get_eggType();
+    string get_fromAnimal() const;
+    string get_eggType() const;
     
     // Setters
     void set_fromAnimal(string);
@@ -33,6 +33,6 @@ private:
     void print() override;
     
     // Destructors
-    ~Egg();
+    ~Egg() override;
 };
 #endif
