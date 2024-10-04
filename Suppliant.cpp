@@ -11,7 +11,7 @@ using namespace std;
 
 // Constructors
 Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList) : StoreBase(numDifferentItem, inventory), costRefList(costRefList), costList(costList) {}
-//Suppliant::Suppliant() : Suppliant(vector<double>(), vector<double>()) {}
+//Suppliant::Suppliant() : Suppliant(10, map<string, Item*>, vector<double>(), vector<double>()) {}
     /*
     -= Default Suppliant Inventory =-
     Egg (1): Free Range Hens Egg
