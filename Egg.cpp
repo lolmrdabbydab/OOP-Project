@@ -1,11 +1,8 @@
 #include "Egg.h"
-#include "PerishableItem.h"
-#include "Printable.h" 
-#include "Item.h"
 #include <string>
 using namespace std;
 
-Egg::Egg(string fromAnimal, string eggType) : PerishableItem(shelfLifeinDay, expiration), fromAnimal(fromAnimal), eggType(eggType) {};
+Egg::Egg(string, string) : PerishableItem(shelfLifeinDay, expiration), fromAnimal(fromAnimal), eggType(eggType) {};
 string Egg::get_fromAnimal()
 {
     return fromAnimal;
@@ -22,3 +19,4 @@ void Egg::set_eggType(string eggType)
 {
     this->eggType = eggType;
 }
+void Egg::print() {}

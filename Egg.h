@@ -12,7 +12,7 @@ public:
     string eggType;
 
 private:
-    Egg(string fromAnimal, string eggType);
+    Egg(string, string);
     string get_fromAnimal();
     void set_fromAnimal(string fromAnimal);
     string get_eggType();

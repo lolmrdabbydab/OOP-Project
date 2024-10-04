@@ -1,10 +1,8 @@
 #include "Milk.h"
-#include "PerishableItem.h"
-#include "Item.h"
 #include <string>
 using namespace std;
 
-Milk::Milk(string milksources, string milkType), PerishableItem(shelfLifeinDay, expiration), milksources(milksources), milkType(milkType) {};
+Milk::Milk(string, string), PerishableItem(shelfLifeinDay, expiration), milksources(milksources), milkType(milkType) {};
 string Milk::get_milksources()
 {
     return milksources;
@@ -21,3 +19,4 @@ void Milk::set_milkType(string milkType)
 {
     this->milkType = milkType;
 }
+void Milk::print() {}
