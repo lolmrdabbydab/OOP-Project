@@ -1,10 +1,15 @@
 #ifndef EGG_H
 #define EGG_H
-#include "PerishableItem.h"
+
+#include <iostream>
+#include <string>
+
 #include "Printable.h"
 #include "Item.h"
-#include <string>
+#include "PerishableItem.h"
+
 using namespace std;
+
 class Egg : public PerishableItem
 {
 public:
@@ -12,11 +17,22 @@ public:
     string eggType;
 
 private:
-    Egg(string fromAnimal, string eggType);
+    // Constructors
+    Egg(string, string);
+    Egg();
+
+    // Getters
     string get_fromAnimal();
-    void set_fromAnimal(string fromAnimal);
     string get_eggType();
-    void set_eggType(string eggType);
+    
+    // Setters
+    void set_fromAnimal(string);
+    void set_eggType(string);
+    
+    // Methods
     void print() override;
+    
+    // Destructors
+    ~Egg();
 };
 #endif
