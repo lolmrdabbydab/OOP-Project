@@ -1,10 +1,15 @@
-#include "Toy.h"
+#include <iostream>
 #include <string>
+
+#include "Printable.h"
+#include "Item.h"
+#include "Toy.h"
+
 using namespace std;
 
 // Constructors
 Toy::Toy(string, string), Item(NumItem, price, brand), toyType(toyType), minAgeRestriction(minAgeRestriction) {};
-Toy::Toy()
+Toy::Toy() : Toy("NaN", "NaN") {}
 
 // Getters
 string Toy::get_toyType() { return toyType; }
