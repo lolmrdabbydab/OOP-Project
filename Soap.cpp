@@ -12,13 +12,13 @@ Soap::Soap(int numItem, double price, string brand, string soapType) : Item(numI
 Soap:Soap() : Soap(0, 0.0, "NaN", "NaN") {}
 
 // Getters
-string Soap::get_soapType() { return soapType; }
+string Soap::get_soapType() const { return soapType; }
 
 // Setters
 void Soap::set_soapType(string soapType) { this->soapType = soapType; }
 
 // Methods
-void Soap::print() { return; }
+void Soap::print() {}
 
 // Destructor
-Soap::~Soap() { return; }
+Soap::~Soap() {}

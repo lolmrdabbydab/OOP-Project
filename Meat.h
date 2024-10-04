@@ -18,12 +18,12 @@ public:
 
 private:
     // Constructors
-    Meat(int, double, string, int, int*, string, string);
+    Meat(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string bodyPart);
     Meat();
-    
+
     // Getters
-    string get_fromAnimal();
-    string get_bodyPart();
+    string get_fromAnimal() const;
+    string get_bodyPart() const;
 
     // Setters
     void set_fromAnimal(string);
@@ -33,7 +33,7 @@ private:
     void print() override;
 
     // Destructor
-    ~Meat();
+    ~Meat() override;
 };
 
 #endif

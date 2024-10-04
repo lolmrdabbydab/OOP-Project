@@ -18,12 +18,12 @@ public:
 
 private:
     // Constructors
-    Milk(int, double, string, int, int*, string, string);
+    Milk(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string milkSource, string milkType);
     Milk();
     
     // Getters
-    string get_milkSource();
-    string get_milkType();
+    string get_milkSource() const;
+    string get_milkType() const;
     
     // Setters
     void set_milkSource(string);
@@ -33,7 +33,7 @@ private:
     void print() override;
 
     // Destructors
-    ~Milk();
+    ~Milk() override;
 };
 
 #endif

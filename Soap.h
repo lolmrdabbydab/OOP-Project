@@ -16,20 +16,20 @@ public:
 
 private:
     // Constructors
-    Soap(int, double, string, string);
+    Soap(int numItem, double price, string brand, string soapType);
     Soap();
 
     // Getters
-    string get_soapType();
+    string get_soapType() const;
 
     // Setters
-    void set_soapType(string soapType);
+    void set_soapType(string);
     
     // Methods
     void print() override;
 
     // Destructor
-    ~Soap();
+    ~Soap() override;
 };
 
 #endif

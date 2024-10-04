@@ -8,19 +8,20 @@
 using namespace std;
 
 // Constructors
-Toy::Toy(int numItem, double price, string brand, string toyType, string minAgeRestriction) : Item(numItem, price, brand), toyType(toyType), minAgeRestriction(minAgeRestriction) {}
+Toy::Toy(int numItem, double price, string brand, string toyType, string minAgeRestriction)
+    : Item(numItem, price, brand), toyType(toyType), minAgeRestriction(minAgeRestriction) {}
 Toy::Toy() : Toy(0, 0.0, "NaN", "NaN", "NaN") {}
 
 // Getters
-string Toy::get_toyType() { return toyType; }
-string Toy::get_minAgeRestriction() { return minAgeRestriction; }
+string Toy::get_toyType() const { return toyType; }
+string Toy::get_minAgeRestriction() const { return minAgeRestriction; }
 
 // Setters
 void Toy::set_minAgeRestriction(string minAgeRestriction) { this->minAgeRestriction = minAgeRestriction; }
 void Toy::set_toyType(string toyType) { this->toyType = toyType; }
 
 // Methods
-void Toy::print() { return; };
+void Toy::print() {};
 
 // Destructor
-Toy::~Toy() { return; };
+Toy::~Toy() {};

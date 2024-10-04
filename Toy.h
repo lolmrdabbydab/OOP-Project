@@ -16,21 +16,22 @@ public:
 
 private:
     // Constructors
-    Toy(int, double, string, string, string);
+    Toy(int numItem, double price, string brand, string toyType, string minAgeRestriction);
     Toy();
-    
+
     // Getters
-    string get_toyType();
-    string get_minAgeRestriction();
+    string get_toyType() const;
+    string get_minAgeRestriction() const;
 
     // Setters
-    void set_toyType(string toyType);
-    void set_minAgeRestriction(string minAgeRestriction);
-    
+    void set_toyType(string);
+    void set_minAgeRestriction(string);
+
     // Methods
     void print() override;
 
     // Destructor
-    ~Toy();
+    ~Toy() override;
 };
+
 #endif

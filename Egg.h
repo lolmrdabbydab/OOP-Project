@@ -18,7 +18,7 @@ public:
 
 private:
     // Constructors
-    Egg(int, double, string, int, int*, string, string);
+    Egg(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string eggType);
     Egg();
 
     // Getters
