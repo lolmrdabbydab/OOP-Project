@@ -3,13 +3,13 @@
 using namespace std;
 
 Toys::Toys(string, string), Item(NumItem, price, brand), toyType(toyType), minAgeRestriction(minAgeRestriction) {};
-string Toys::get_toyTpye()
+string Toys::get_toyType()
 {
-    return toyTpye;
+    return toyType;
 }
-void Toys::set_toyTpye(string toyTpye)
+void Toys::set_toyType(string toyType)
 {
-    this->toyTpye = toyTpye;
+    this->toyType = toyType;
 }
 string Toys::get_minAgeRestriction()
 {
