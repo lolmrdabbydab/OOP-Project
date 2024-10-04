@@ -18,7 +18,7 @@ public:
 
 private:
     // Constructors
-    Milk(string, string);
+    Milk(int, double, string, int, int*, string, string);
     Milk();
     
     // Getters

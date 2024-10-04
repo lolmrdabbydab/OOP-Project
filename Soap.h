@@ -16,7 +16,7 @@ public:
 
 private:
     // Constructors
-    Soap(string);
+    Soap(int, double, string, string);
     Soap();
 
     // Getters

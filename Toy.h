@@ -16,7 +16,7 @@ public:
 
 private:
     // Constructors
-    Toy(string, string);
+    Toy(int, double, string, string, string);
     Toy();
     
     // Getters

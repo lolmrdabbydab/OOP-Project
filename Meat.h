@@ -18,7 +18,7 @@ public:
 
 private:
     // Constructors
-    Meat(string, string);
+    Meat(int, double, string, int, int*, string, string);
     Meat();
     
     // Getters

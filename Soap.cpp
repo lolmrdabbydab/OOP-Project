@@ -8,8 +8,8 @@
 using namespace std;
 
 // Constructors
-Soap::Soap(string soapType), Item(numItem, price, brand), soapType(soapType) {}
-Soap:Soap() : Soap("NaN") {}
+Soap::Soap(int numItem, double price, string brand, string soapType) : Item(numItem, price, brand), soapType(soapType) {}
+Soap:Soap() : Soap(0, 0.0, "NaN", "NaN") {}
 
 // Getters
 string Soap::get_soapType() { return soapType; }

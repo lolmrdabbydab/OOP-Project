@@ -18,7 +18,7 @@ public:
 
 private:
     // Constructors
-    Egg(string, string);
+    Egg(int, double, string, int, int*, string, string);
     Egg();
 
     // Getters
