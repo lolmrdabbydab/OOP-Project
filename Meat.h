@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Printable.h"
 #include "Item.h"
@@ -12,11 +13,11 @@ using namespace std;
 
 class Meat : public PerishableItem
 {
-public:
+private:
     string fromAnimal;
     string bodyPart;
 
-private:
+public:
     // Constructors
     Meat(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string bodyPart);
     Meat();

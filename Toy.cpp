@@ -17,11 +17,11 @@ string Toy::get_toyType() const { return toyType; }
 string Toy::get_minAgeRestriction() const { return minAgeRestriction; }
 
 // Setters
-void Toy::set_minAgeRestriction(string minAgeRestriction) { this->minAgeRestriction = minAgeRestriction; }
 void Toy::set_toyType(string toyType) { this->toyType = toyType; }
+void Toy::set_minAgeRestriction(string minAgeRestriction) { this->minAgeRestriction = minAgeRestriction; }
 
 // Methods
-void Toy::print() {};
+void Toy::print() {}
 
 // Destructor
-Toy::~Toy() {};
+Toy::~Toy() {}

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Printable.h"
 #include "Item.h"
@@ -11,7 +12,7 @@ using namespace std;
 // Constructors
 Meat::Meat(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string bodyPart)
     : PerishableItem(numItem, price, brand, shelfLifeInDay, expirationList), fromAnimal(fromAnimal), bodyPart(bodyPart) {}
-Meat::Meat() : Meat(0, 0.0, "NaN", 0, vector<int>, "NaN", "NaN") {}
+Meat::Meat() : Meat(0, 0.0, "NaN", 0, vector<int>(), "NaN", "NaN") {}
 
 // Getters
 string Meat::get_fromAnimal() const { return fromAnimal; }

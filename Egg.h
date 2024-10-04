@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Printable.h"
 #include "Item.h"
@@ -12,11 +13,11 @@ using namespace std;
 
 class Egg : public PerishableItem
 {
-public:
+private:
     string fromAnimal;
     string eggType;
 
-private:
+public:
     // Constructors
     Egg(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string eggType);
     Egg();
@@ -24,15 +25,16 @@ private:
     // Getters
     string get_fromAnimal() const;
     string get_eggType() const;
-    
+
     // Setters
     void set_fromAnimal(string);
     void set_eggType(string);
-    
+
     // Methods
     void print() override;
-    
+
     // Destructors
     ~Egg() override;
 };
+
 #endif

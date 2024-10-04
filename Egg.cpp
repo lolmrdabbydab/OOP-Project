@@ -12,7 +12,7 @@ using namespace std;
 // Constructors
 Egg::Egg(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string eggType) 
     : PerishableItem(numItem, price, brand, shelfLifeInDay, expirationList), fromAnimal(fromAnimal), eggType(eggType) {}
-Egg::Egg() : Egg(0, 0.0, "NaN", 0, vector<int>, "NaN", "NaN") {}
+Egg::Egg() : Egg(0, 0.0, "NaN", 0, vector<int>(), "NaN", "NaN") {}
 
 // Getters
 string Egg::get_fromAnimal() const { return fromAnimal; }

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Printable.h"
 #include "Item.h"
@@ -12,19 +13,19 @@ using namespace std;
 
 class Milk : public PerishableItem
 {
-public:
+private:
     string milkSource;
     string milkType;
 
-private:
+public:
     // Constructors
     Milk(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string milkSource, string milkType);
     Milk();
-    
+
     // Getters
     string get_milkSource() const;
     string get_milkType() const;
-    
+
     // Setters
     void set_milkSource(string);
     void set_milkType(string);
@@ -32,7 +33,7 @@ private:
     // Methods
     void print() override;
 
-    // Destructors
+    // Destructor
     ~Milk() override;
 };
 

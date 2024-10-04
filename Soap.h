@@ -11,10 +11,10 @@ using namespace std;
 
 class Soap : public Item
 {
-public:
+private:
     string soapType;
 
-private:
+public:
     // Constructors
     Soap(int numItem, double price, string brand, string soapType);
     Soap();
@@ -24,7 +24,7 @@ private:
 
     // Setters
     void set_soapType(string);
-    
+
     // Methods
     void print() override;
 

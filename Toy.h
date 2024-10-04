@@ -10,11 +10,11 @@ using namespace std;
 
 class Toy : public Item
 {
-public:
+private:
     string toyType;
     string minAgeRestriction;
 
-private:
+public:
     // Constructors
     Toy(int numItem, double price, string brand, string toyType, string minAgeRestriction);
     Toy();
