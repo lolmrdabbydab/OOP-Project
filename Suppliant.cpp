@@ -10,7 +10,8 @@
 using namespace std;
 
 // Constructors
-Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList) : StoreBase(numDifferentItem, inventory), costRefList(costRefList), costList(costList) {}
+Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList) 
+    : StoreBase(numDifferentItem, inventory), costRefList(costRefList), costList(costList) {}
 //Suppliant::Suppliant() : Suppliant(10, map<string, Item*>, vector<double>(), vector<double>()) {}
     /*
     -= Default Suppliant Inventory =-
@@ -28,8 +29,8 @@ Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<
 
 
 // Getters
-vector<double> Suppliant::get_costRefList() { return costRefList; }
-vector<double> Suppliant::get_costList() { return costList; }
+vector<double> Suppliant::get_costRefList() const { return costRefList; }
+vector<double> Suppliant::get_costList() const { return costList; }
 
 // Setters
 void Suppliant::set_costRefList(vector<double> costRefList) { this->costRefList = costRefList; }
@@ -37,7 +38,7 @@ void Suppliant::set_costRefList(vector<double> costRefList) { this->costRefList 
 void Suppliant::set_costList(vector<double> costList) { this->costList = costList; }
 
 // Methods
-void Suppliant::print() { return; }
+void Suppliant::print() {}
 
 // Destructor
 Suppliant::~Suppliant() {}

@@ -19,12 +19,12 @@ private:
 
 public:
     // Constructors
-    Suppliant(int, map<string, Item*>, vector<double>, vector<double>);
+    Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList);
     Suppliant();
 
     // Getters
-    vector<double> get_costRefList();
-    vector<double> get_costList();
+    vector<double> get_costRefList() const;
+    vector<double> get_costList() const;
 
     // Setters
     void set_costRefList(vector<double>);
@@ -34,7 +34,7 @@ public:
     void print() override;
 
     // Destructor
-    ~Suppliant();
+    ~Suppliant() override;
 };
 
 #endif

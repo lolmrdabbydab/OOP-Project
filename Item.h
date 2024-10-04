@@ -18,13 +18,13 @@ protected:
 
 public:
     // Constructors
+    Item(int numItem, double price, string brand);
     Item();
-    Item(int, double, string);
 
     // Getters
-    int get_numItem();
-    double get_price();
-    string get_brand();
+    int get_numItem() const;
+    double get_price() const;
+    string get_brand() const;
 
     // Setters
     void set_numItem(int);
@@ -35,7 +35,7 @@ public:
     void print() override;
 
     // Destructor
-    virtual ~Item();
+    virtual ~Item() override;
 };
 
 #endif

@@ -22,15 +22,15 @@ private:
 
 public:
     // Constructors
-    Store(int, map<string, Item*>, int, int, double, double, double);
+    Store(int numDifferentItem, map<string, Item*> inventory, int currentDay, int numCustomer, double balance, double rating, double target);
     Store();
 
     // Getters
-    int get_currentDay();
-    int get_numCustomer();
-    double get_balance();
-    double get_rating();
-    double get_target();
+    int get_currentDay() const;
+    int get_numCustomer() const;
+    double get_balance() const;
+    double get_rating() const;
+    double get_target() const;
 
     // Setters
     void set_currentDay(int);
@@ -43,7 +43,7 @@ public:
     void print() override;
 
     // Destructor
-    ~Store();
+    ~Store() override;
 };
 
 #endif
