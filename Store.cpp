@@ -12,7 +12,8 @@ using namespace std;
 // Constructors
 Store::Store(int numDifferentItem, map<string, Item*> inventory, int currentDay, int numCustomer, double balance, double rating, double target)
     : StoreBase(numDifferentItem, inventory), currentDay(currentDay), numCustomer(numCustomer), balance(balance), rating(rating), target(target) {}
-Store::Store() : Store(10, map<string, Item*>, 1, 1, 30.0, 5, 10) {} // Need to Set Default inventory
+
+Store::Store() : Store(10, map<string, Item*>(), 1, 1, 30.0, 5, 10) {} // Need to set Default Inventory
 
 // Getters
 int Store::get_currentDay() const { return currentDay; }

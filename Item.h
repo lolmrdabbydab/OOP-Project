@@ -35,7 +35,7 @@ public:
     void print() override;
 
     // Destructor
-    virtual ~Item() override;
+    virtual ~Item();
 };
 
 #endif

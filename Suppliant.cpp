@@ -12,7 +12,8 @@ using namespace std;
 // Constructors
 Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList) 
     : StoreBase(numDifferentItem, inventory), costRefList(costRefList), costList(costList) {}
-//Suppliant::Suppliant() : Suppliant(10, map<string, Item*>, vector<double>(), vector<double>()) {}
+
+Suppliant::Suppliant() : Suppliant(10, map<string, Item*>(), vector<double>(), vector<double>()) {} // Need to make Default Inventory, costRefList & CostList
     /*
     -= Default Suppliant Inventory =-
     Egg (1): Free Range Hens Egg
@@ -27,14 +28,12 @@ Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<
     Soap (2): Dove Body Wash
     */
 
-
-// Getters
+/ Getters
 vector<double> Suppliant::get_costRefList() const { return costRefList; }
 vector<double> Suppliant::get_costList() const { return costList; }
 
 // Setters
 void Suppliant::set_costRefList(vector<double> costRefList) { this->costRefList = costRefList; }
-
 void Suppliant::set_costList(vector<double> costList) { this->costList = costList; }
 
 // Methods
