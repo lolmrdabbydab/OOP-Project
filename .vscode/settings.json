@@ -1,5 +1,6 @@
 {
     "files.associations": {
+<<<<<<< HEAD
         "vector": "cpp",
         "iostream": "cpp",
         "string": "cpp",
@@ -53,5 +54,15 @@
         "unordered_map": "cpp",
         "variant": "cpp",
         "algorithm": "cpp"
+=======
+<<<<<<< HEAD
+=======
+        "__split_buffer": "cpp",
+        "new": "cpp",
+        "string": "cpp",
+        "typeinfo": "cpp",
+>>>>>>> de5b04e (Update)
+        "vector": "cpp"
+>>>>>>> 89ac71fba9ec3a732f6d871cc8e5fcd1f5e6fe15
     }
 }
