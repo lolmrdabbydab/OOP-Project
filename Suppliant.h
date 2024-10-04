@@ -5,16 +5,16 @@
 #include <string>
 #include <vector>
 
-#include "StoreBase.h"
 #include "Printable.h"
+#include "StoreBase.h"
 
 using namespace std;
 
 class Suppliant : public StoreBase
 {
 private:
-    costRefList vector<double>;
-    costList vector<double>;
+    vector<double> costRefList;
+    vector<double> costList;
 
 public:
     // Constructors
@@ -28,12 +28,12 @@ public:
     // Setters
     void set_costRefList(vector<double>);
     void set_costList(vector<double>);
-    
+
     // Methods
     void print() override;
-    
+
     // Destructor
     ~Suppliant();
-}
+};
 
 #endif

@@ -43,6 +43,6 @@ public:
 
     // Destructor
     ~Store();
-}
+};
 
 #endif
