@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 #include "Printable.h"
 #include "StoreBase.h"
@@ -18,8 +19,8 @@ private:
 
 public:
     // Constructors
+    Suppliant(int, map<string, Item*>, vector<double>, vector<double>);
     Suppliant();
-    Suppliant(vector<double>, vector<double>);
 
     // Getters
     vector<double> get_costRefList();

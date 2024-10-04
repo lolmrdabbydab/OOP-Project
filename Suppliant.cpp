@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 #include "Printable.h"
 #include "StoreBase.h"
@@ -9,7 +10,7 @@
 using namespace std;
 
 // Constructors
-Suppliant::Suppliant(vector<double> costRefList, vector<double> costList) : costRefList(costRefList), costList(costList) {}
+Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList) : StoreBase(numDifferentItem, inventory), costRefList(costRefList), costList(costList) {}
 //Suppliant::Suppliant() : Suppliant(vector<double>(), vector<double>()) {}
     /*
     -= Default Suppliant Inventory =-

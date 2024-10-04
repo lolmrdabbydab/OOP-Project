@@ -4,9 +4,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
-#include "StoreBase.h"
 #include "Printable.h"
+#include "StoreBase.h"
 
 using namespace std;
 
@@ -21,8 +22,8 @@ private:
 
 public:
     // Constructors
+    Store(int, map<string, Item*>, int, int, double, double, double);
     Store();
-    Store(int, int, double, double, double);
 
     // Getters
     int get_currentDay();
