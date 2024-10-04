@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constructors
-Soap::Soap(string), Item(numItem, price, brand), soapType(soapType) {};
+Soap::Soap(string soapType), Item(numItem, price, brand), soapType(soapType) {}
 Soap:Soap() : Soap("NaN") {}
 
 // Getters

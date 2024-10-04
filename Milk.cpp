@@ -9,7 +9,7 @@
 using namespace std;
 
 // Constructors
-Milk::Milk(string, string), PerishableItem(shelfLifeinDay, expiration), milkSource(milkSource), milkType(milkType) {};
+Milk::Milk(string milkSource, string milkType), PerishableItem(shelfLifeinDay, expiration), milkSource(milkSource), milkType(milkType) {}
 Milk::Milk() : Milk("NaN", "NaN") {}
 
 // Getters

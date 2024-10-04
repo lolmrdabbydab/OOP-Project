@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constructors
-Toy::Toy(string, string), Item(NumItem, price, brand), toyType(toyType), minAgeRestriction(minAgeRestriction) {};
+Toy::Toy(string toyType, string minAgeRestriction) : Item(NumItem, price, brand), toyType(toyType), minAgeRestriction(minAgeRestriction) {}
 Toy::Toy() : Toy("NaN", "NaN") {}
 
 // Getters
