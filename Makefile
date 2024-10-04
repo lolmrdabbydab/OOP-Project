@@ -1,7 +1,7 @@
 .PHONY: create-%, run-%
 
 # Variable
-m = "Update"
+m = Update
 
 help:
 	@echo "To push all changes with commit message "Update" type: 'make push'"
