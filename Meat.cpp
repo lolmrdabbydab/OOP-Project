@@ -4,11 +4,12 @@
 #include "Printable.h"
 #include "Item.h"
 #include "PerishableItem.h"
+#include "Meat.h"
 
 using namespace std;
 
 // Constructors
-Meat::Meat(string, string) : PerishableItem(shelfLifeinDay, expirationList), fromAnimal(fromAnimal), bodyPart(bodyAnimal) {}
+Meat::Meat(string fromAnimal, string bodyPart) : PerishableItem(shelfLifeinDay, expirationList), fromAnimal(fromAnimal), bodyPart(bodyPart) {}
 Meat::Meat() : Meat("NaN", "NaN") {}
 
 // Getters
