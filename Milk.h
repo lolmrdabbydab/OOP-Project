@@ -1,22 +1,39 @@
 #ifndef MILK_H
 #define MILK_H
-#include "PerishableItem.h"
+
+#include <iostream>
+#include <string>
+
 #include "Printable.h"
 #include "Item.h"
-#include <string>
+#include "PerishableItem.h"
+
 using namespace std;
+
 class Milk : public PerishableItem
 {
 public:
-    string milksources;
+    string milkSource;
     string milkType;
 
 private:
+    // Constructors
     Milk(string, string);
-    string get_milksources();
-    void set_milksources(string milksources);
+    Milk();
+    
+    // Getters
+    string get_milkSource();
     string get_milkType();
-    void set_milkType(string milkType);
+    
+    // Setters
+    void set_milkSource(string);
+    void set_milkType(string);
+
+    // Methods
     void print() override;
+
+    // Destructors
+    ~Milk();
 };
+
 #endif

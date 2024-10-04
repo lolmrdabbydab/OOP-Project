@@ -1,22 +1,27 @@
-#include "Milk.h"
+#include <iostream>
 #include <string>
+
+#include "Printable.h"
+#include "Item.h"
+#include "PerishableItem.h"
+#include "Milk.h"
+
 using namespace std;
 
-Milk::Milk(string, string), PerishableItem(shelfLifeinDay, expiration), milksources(milksources), milkType(milkType) {};
-string Milk::get_milksources()
-{
-    return milksources;
-}
-void Milk::set_milksources(string milksources)
-{
-    this->milksources = milksources;
-}
-string Milk::get_milkType()
-{
-    return milkType;
-}
-void Milk::set_milkType(string milkType)
-{
-    this->milkType = milkType;
-}
-void Milk::print() {}
+// Constructors
+Milk::Milk(string, string), PerishableItem(shelfLifeinDay, expiration), milkSource(milkSource), milkType(milkType) {};
+Milk::Milk() : Milk("NaN", "NaN") {}
+
+// Getters
+string Milk::get_milkSource() { return milkSource; }
+string Milk::get_milkType() { return milkType; }
+
+// Setters
+void Milk::set_milkSource(string milkSource) { this->milkSource = milkSource; }
+void Milk::set_milkType(string milkType) { this->milkType = milkType; }
+
+// Methods
+void Milk::print() { return; }
+
+// Destructors
+Milk::~Milk() { return; }

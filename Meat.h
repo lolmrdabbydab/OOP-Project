@@ -1,9 +1,13 @@
 #ifndef MEAT_H
 #define MEAT_H
+
+#include <iostream>
 #include <string>
-#include "PerishableItem.h"
-#include "Item.h"
+
 #include "Printable.h"
+#include "Item.h"
+#include "PerishableItem.h"
+
 using namespace std;
 
 class Meat : public PerishableItem
@@ -13,11 +17,23 @@ public:
     string bodyPart;
 
 private:
+    // Constructors
     Meat(string, string);
+    Meat();
+    
+    // Getters
     string get_fromAnimal();
-    void set_fromAnimal(string fromAnimal);
     string get_bodyPart();
-    void set_bodyPart(string bodyPart);
+
+    // Setters
+    void set_fromAnimal(string);
+    void set_bodyPart(string);
+
+    // Methods
     void print() override;
+
+    // Destructor
+    ~Meat();
 };
+
 #endif
