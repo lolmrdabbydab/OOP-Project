@@ -10,16 +10,15 @@
 using namespace std;
 
 // Constructors
-Egg::Egg(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string eggType) 
-    : PerishableItem(numItem, price, brand, shelfLifeInDay, expirationList), fromAnimal(fromAnimal), eggType(eggType) {}
-Egg::Egg() : Egg(0, 0.0, "NaN", 0, vector<int>(), "NaN", "NaN") {}
+Egg::Egg(int numItem, double price, string brand, int shelfLifeInDay,bool fromAnimal,bool isPerishable, string eggType) 
+: PerishableItem(numItem, price, brand,isPerishable, shelfLifeInDay), fromAnimal(fromAnimal), eggType(eggType) {}
 
 // Getters
-string Egg::get_fromAnimal() const { return fromAnimal; }
+bool Egg::get_fromAnimal() const { return fromAnimal; }
 string Egg::get_eggType() const { return eggType; }
 
 // Setters
-void Egg::set_fromAnimal(string fromAnimal) { this->fromAnimal = fromAnimal; }
+void Egg::set_fromAnimal(bool fromAnimal) { this->fromAnimal = fromAnimal; }
 void Egg::set_eggType(string eggType) { this->eggType = eggType; }
 
 // Methods

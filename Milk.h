@@ -19,8 +19,7 @@ private:
 
 public:
     // Constructors
-    Milk(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string milkSource, string milkType);
-    Milk();
+    Milk(int numItem, double price, string brand, bool isPerishableItem,int shelfLifeInDay,  string milkSource, string milkType);
 
     // Getters
     string get_milkSource() const;

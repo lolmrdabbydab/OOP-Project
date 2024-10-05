@@ -16,8 +16,7 @@ private:
 
 public:
     // Constructors
-    Soap(int numItem, double price, string brand, string soapType);
-    Soap();
+    Soap(int numItem, double price, string brand, bool isPerishableItem,string soapType);
 
     // Getters
     string get_soapType() const;
@@ -27,6 +26,7 @@ public:
 
     // Methods
     void print() override;
+    void change_numItem(int n);
 
     // Destructor
     ~Soap() override;

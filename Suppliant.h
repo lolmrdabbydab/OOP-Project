@@ -14,25 +14,24 @@ using namespace std;
 class Suppliant : public StoreBase
 {
 private:
-    vector<double> costRefList;
-    vector<double> costList;
+    double costRefList[10];
+    double costList[10];
 
 public:
     // Constructors
-    Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList);
     Suppliant();
 
     // Getters
-    vector<double> get_costRefList() const;
-    vector<double> get_costList() const;
+    double* get_costRefList() const;
+    double* get_costList() const;
 
     // Setters
-    void set_costRefList(vector<double>);
-    void set_costList(vector<double>);
+    void set_costRefList(double[10]);
+    void set_costList(double[10]);
 
     // Methods
     void print() override;
-
+    void updateCost();
     // Destructor
     ~Suppliant() override;
 };

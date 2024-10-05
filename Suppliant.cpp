@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <stdlib.h>
+#include <ctime>
 
 #include "Printable.h"
 #include "StoreBase.h"
@@ -10,34 +12,58 @@
 using namespace std;
 
 // Constructors
-Suppliant::Suppliant(int numDifferentItem, map<string, Item*> inventory, vector<double> costRefList, vector<double> costList) 
-    : StoreBase(numDifferentItem, inventory), costRefList(costRefList), costList(costList) {}
 
-Suppliant::Suppliant() : Suppliant(10, map<string, Item*>(), vector<double>(), vector<double>()) {} // Need to make Default Inventory, costRefList & CostList
-    /*
-    -= Default Suppliant Inventory =-
-    Egg (1): Free Range Hens Egg
-    Egg (2): Cage Free Duck Egg
-    Milk (1): Cow Full Fat
-    Milk (1): Almond Vegan
-    Meat (1): Chicken Wing
-    Meat (2): Cow Sirloin
-    Toy (1): PlayDough Sand (1 year old)
-    Toy (2): Lego Figure (3 year old)
-    Soap (1): Dove Shampoo
-    Soap (2): Dove Body Wash
-    */
+Suppliant::Suppliant() {
+    this->costRefList[0] = 5;
+    this->costRefList[1] = 5.5;
+    this->costRefList[2] = 4;
+    this->costRefList[3] = 4;
+    this->costRefList[4] = 8;
+    this->costRefList[5] = 12;
+    this->costRefList[6] = 7;
+    this->costRefList[7] = 7;
+    this->costRefList[8] = 10;
+    this->costRefList[9] = 11;
+    for (int i =0;i<10;i++){
+        costList[i] = costRefList[i];
+    }
 
-/ Getters
-vector<double> Suppliant::get_costRefList() const { return costRefList; }
-vector<double> Suppliant::get_costList() const { return costList; }
+}
+    
+
+// Getters
+double* Suppliant::get_costRefList() const { return costRefList; }
+double* Suppliant::get_costList() const { return costList; }
+
+
 
 // Setters
-void Suppliant::set_costRefList(vector<double> costRefList) { this->costRefList = costRefList; }
-void Suppliant::set_costList(vector<double> costList) { this->costList = costList; }
+void Suppliant::set_costRefList(double[10])
+{
+}
+
+void Suppliant::set_costList(double[10])
+{
+}
 
 // Methods
-void Suppliant::print() {}
+void Suppliant::print() {
+    std::cout<<"Costs of goods today"<<std::endl;
+    std::cout<<"********************"<<std::endl;
+    for (int i =0;i<10;i++){
+        std::cout<<i+1<<". "<<itemNames[i]<<":"<<costList[i]<<std::endl;
+    }
+}
+
+void Suppliant::updateCost()
+{
+    std::srand(std::time(nullptr));
+    for (int i =0;i<10;i++){
+        double rateChange = 0.5+(std::rand()%10)/10.0 ;
+        costList[i] = costRefList[i] *rateChange;
+    }
+    
+}
 
 // Destructor
 Suppliant::~Suppliant() {}
