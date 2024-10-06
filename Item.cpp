@@ -44,10 +44,12 @@ void Item::sellItem(int n)
 void Item::updateItem()
 {
 }
+
 int Item::get_shelfLifeInDay()
 {
     return 0;
 }
+
 int *Item::get_expirationList()
 {
     return nullptr;

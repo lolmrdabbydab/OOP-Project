@@ -6,7 +6,7 @@
 #include "Printable.h"
 #include "StoreBase.h"
 #include "Store.h"
-
+#include "Item.h"
 using namespace std;
 
 // Constructors
@@ -28,7 +28,8 @@ void Store::set_target(double target) { this->target = target; }
 
 void Store::updateStore()
 {
-    for (auto i = this->get_inventory().begin();i!= this->get_inventory().end();i++){
+    std::map<std::string,Item*> _inventory = this->get_inventory();
+    for (auto i = _inventory.begin();i!= _inventory.end();i++){
         if(i->second->get_isPerishableItem()){
             i->second-> updateItem();
         }   

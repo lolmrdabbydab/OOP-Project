@@ -2,7 +2,7 @@
 #include "Item.h"
 #include "PerishableItem.h"
 
-PerishableItem::PerishableItem(int numItem, double price, std::string brand,bool isPerisableItem, int shelfLifeInday):Item(numItem,price,brand,isPerishableItem),shelfLifeInDay(shelfLifeInDay)
+PerishableItem::PerishableItem(int numItem, double price, std::string brand,bool isPerishableItem, int shelfLifeInday):Item(numItem,price,brand,isPerishableItem),shelfLifeInDay(shelfLifeInDay)
 {
     this->expirationList = new int[shelfLifeInDay]();
 }

@@ -31,7 +31,7 @@ public:
     void changeItem(int n);
 
     // Destructor
-    ~Toy() override;
+    ~Toy() ;
 };
 
 #endif

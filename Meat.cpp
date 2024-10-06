@@ -11,7 +11,7 @@ using namespace std;
 
 // Constructors
 
-Meat::Meat(int numItem, double price, string brand, int shelfLifeInDay, bool ItemItem, bool fromAnimal, string bodyPart): PerishableItem(numItem, price, brand,isPerishableItem, shelfLifeInDay),fromAnimal(fromAnimal),bodyPart(bodyPart)
+Meat::Meat(int numItem, double price, string brand, int shelfLifeInDay, bool isPerishableItem, bool fromAnimal, string bodyPart): PerishableItem(numItem, price, brand,isPerishableItem, shelfLifeInDay),fromAnimal(fromAnimal),bodyPart(bodyPart)
 {
 }
 

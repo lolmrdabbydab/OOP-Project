@@ -66,4 +66,5 @@ void Suppliant::updateCost()
 }
 
 // Destructor
-Suppliant::~Suppliant() {}
+Suppliant::~Suppliant() {
+}

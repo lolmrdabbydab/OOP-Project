@@ -29,7 +29,7 @@ public:
     void change_numItem(int n);
 
     // Destructor
-    ~Soap() override;
+    ~Soap() ;
 };
 
 #endif

@@ -33,7 +33,7 @@ public:
     void print() override;
 
     // Destructor
-    ~Milk() override;
+    ~Milk() ;
 };
 
 #endif

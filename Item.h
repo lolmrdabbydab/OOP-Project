@@ -40,7 +40,7 @@ public:
     virtual int* get_expirationList();
     virtual void set_expirationList(int* n);
     // Destructor
-    virtual ~Item();
+    ~Item();
 };
 
 #endif
