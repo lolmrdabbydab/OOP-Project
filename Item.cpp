@@ -44,6 +44,17 @@ void Item::sellItem(int n)
 void Item::updateItem()
 {
 }
+int Item::get_shelfLifeInDay()
+{
+    return 0;
+}
+int *Item::get_expirationList()
+{
+    return nullptr;
+}
+void Item::set_expirationList(int *n)
+{
+}
 void Item::change_numItem(int n)
 {  
     this->numItem +=n;

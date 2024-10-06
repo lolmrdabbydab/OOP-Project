@@ -22,8 +22,8 @@ public:
     Suppliant();
 
     // Getters
-    double* get_costRefList() const;
-    double* get_costList() const;
+    double* get_costRefList() ;
+    double* get_costList() ;
 
     // Setters
     void set_costRefList(double[10]);
@@ -33,7 +33,7 @@ public:
     void print() override;
     void updateCost();
     // Destructor
-    ~Suppliant() override;
+    ~Suppliant() ;
 };
 
 #endif

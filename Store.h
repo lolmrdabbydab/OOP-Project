@@ -14,11 +14,11 @@ using namespace std;
 class Store : public StoreBase
 {
 private:
-    int currentDay=0;
-    int numCustomer=0;
-    double balance=0;
-    double rating=0;
-    double target=0;
+    int currentDay=1;
+    int numCustomer=1;
+    double balance=30;
+    double rating=5;
+    double target=10;
 
 public:
     // Constructors
@@ -43,7 +43,7 @@ public:
     void print() override;
 
     // Destructor
-    ~Store() override;
+    ~Store() ;
 };
 
 #endif

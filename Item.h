@@ -36,6 +36,9 @@ public:
     virtual void change_numItem(int n);
     virtual void sellItem(int n);
     virtual void updateItem();
+    virtual int get_shelfLifeInDay();
+    virtual int* get_expirationList();
+    virtual void set_expirationList(int* n);
     // Destructor
     virtual ~Item();
 };

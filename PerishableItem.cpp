@@ -4,7 +4,7 @@
 
 PerishableItem::PerishableItem(int numItem, double price, std::string brand,bool isPerisableItem, int shelfLifeInday):Item(numItem,price,brand,isPerishableItem),shelfLifeInDay(shelfLifeInDay)
 {
-    this->expirationList = new int*[shelfLifeInDay]();
+    this->expirationList = new int[shelfLifeInDay]();
 }
 
 int PerishableItem::get_shelfLifeInDay()
@@ -63,8 +63,8 @@ void PerishableItem::updateItem()
     this->numItem = count;
 }
 
-
-PerishableItem::~PerisableItem()
+PerishableItem::~PerishableItem()
 {
     delete []this->expirationList;
 }
+

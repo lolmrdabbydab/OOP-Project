@@ -17,6 +17,6 @@ class PerishableItem: public Item{
         virtual void print();
         void sellItem(int n);
         void updateItem();
-        ~PerisableItem();
+        ~PerishableItem();
 };
 #endif

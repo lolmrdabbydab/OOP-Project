@@ -32,8 +32,8 @@ Suppliant::Suppliant() {
     
 
 // Getters
-double* Suppliant::get_costRefList() const { return costRefList; }
-double* Suppliant::get_costList() const { return costList; }
+double* Suppliant::get_costRefList()  { return  costRefList; }
+double* Suppliant::get_costList()  { return  costList; }
 
 
 

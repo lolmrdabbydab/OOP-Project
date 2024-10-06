@@ -30,7 +30,7 @@ void Store::updateStore()
 {
     for (auto i = this->get_inventory().begin();i!= this->get_inventory().end();i++){
         if(i->second->get_isPerishableItem()){
-            i->second-> change_numItem();
+            i->second-> updateItem();
         }   
     }
 }

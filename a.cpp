@@ -1,16 +1,12 @@
 //C++ Program to validate the data type of the input
 #include <iostream>
-#include <limits>
+#include <vector>
 using namespace std;
 
 int main() {
-    int number;
-    cout << "Enter an integer: ";
-    while (!(cin >> number)) {
-        cout << "Invalid input. Please enter an integer: ";
-        cin.clear(); 
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    vector<int> n = {1,2,3,4};
+    for (int i =0;i<n.size();i++){
+        std::cout<<n[i]<<std::endl;
     }
-    cout << "You entered: " << number << endl;
     return 0;
 }
