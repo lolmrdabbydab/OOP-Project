@@ -25,32 +25,42 @@ int main()
 {
     system("clear");
 
-    std::cout << "-= Welcome to The Retail Simulator Game =-" << std::endl;
-    // Introduction Prompt
-
-    bool running = true;
+    /* -------------------------
+        -= Get Data File =-
+    ------------------------- */
     std::ifstream ReadFile("data.txt");
     std::string haveAccount;
     std::getline(ReadFile, haveAccount);
 
+    /* -------------------------
+        -= Set-up Suppliant =-
+    ------------------------- */
     Suppliant suppliant = Suppliant();
     std::string *itemsName = new std::string[10];
     itemsName = suppliant.get_itemNames();
+
+    /* -------------------------
+        -= Set-up Store =-
+    ------------------------- */
     Store store = Store();
     if (stoi(haveAccount) == 1)
     {
         std::string cd;
         std::getline(ReadFile, cd);
         store.set_currentDay(stoi(cd));
+
         std::string b;
         std::getline(ReadFile, b);
         store.set_balance(stod(b));
+
         std::string r;
         std::getline(ReadFile, r);
         store.set_rating(stod(r));
+
         std::string cn;
         std::getline(ReadFile, cn);
         store.set_numCustomer(stoi(cn));
+
         for (int i = 0; i < 10; i++)
         {
             if (i > 5)
@@ -67,6 +77,7 @@ int main()
                 std::stringstream ss1(line);
                 std::string word;
                 vector<string> information;
+
                 while (ss1 >> word)
                     information.push_back(word);
                 int expirationLength = stoi(information.at(0));
@@ -83,29 +94,42 @@ int main()
         }
     }
     ReadFile.close();
+
     double balance = store.get_balance();
     double rating = store.get_rating();
     double target = store.get_target();
     int currentDay = store.get_currentDay();
     int customerNumber = store.get_numCustomer();
 
+    /* -------------------------
+    -= Finish Set-up & Run Game =-
+    ------------------------- */
+    std::cout << "-= Welcome to The Retail Simulator Game =-" << std::endl;
+    // Introduction Prompt
+
+    /* -------------------------
+    -= User Store Purchasing =-
+    ------------------------- */
+    bool running = true;
     while (running)
     {
         std::srand(std::time(nullptr));
         std::cout << "\n-------------------------------" << std::endl;
         std::cout << "\tWelcome to day " << currentDay << std::endl;
-        std::cout << "-------------------------------\n"
-                  << std::endl;
+        std::cout << "-------------------------------\n" << std::endl;
         std::cout << "* Current Balance: $" << balance << std::endl;
         std::cout << "* Balance Target: $" << target << std::endl;
-        std::cout << "-------------------------------\n"
-                  << std::endl;
+        std::cout << "-------------------------------\n" << std::endl;
+        
         customerNumber += currentDay / 5;
+        
         double *itemsCosts = new double[10];
         itemsCosts = suppliant.get_costList();
+        
         std::cout << "-----> Buying goods for day " << currentDay << " <-----" << std::endl;
         std::cout << "************************************" << std::endl;
         suppliant.print();
+        
         while (true)
         {
             int number;
@@ -150,6 +174,10 @@ int main()
                 }
             }
         }
+
+        /* -------------------------
+                -= Run Day =-
+        ------------------------- */
 
         sleep(1);
 
@@ -197,8 +225,10 @@ int main()
                 rating = 0;
             }
 
-            std::cout << "\n=======-------- Store Status (End of Day " << store.get_currentDay() << ") --------=======\n"
-                      << endl;
+            /* -------------------------
+                -= Day Summary =-
+            ------------------------- */
+            std::cout << "\n=======-------- Store Status (End of Day " << store.get_currentDay() << ") --------=======\n" << endl;
             std::cout << "* Balance: $" << balance << std::endl;
             std::cout << "* Rating: $" << rating << std::endl;
             sleep(2);
