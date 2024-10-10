@@ -14,27 +14,25 @@ using namespace std;
 class Meat : public PerishableItem
 {
 private:
-    string fromAnimal;
+    bool fromAnimal;
     string bodyPart;
 
 public:
     // Constructors
-    Meat(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string fromAnimal, string bodyPart);
-    Meat();
-
+    Meat(int numItem, double price, string brand, int shelfLifeInDay, bool isPerishableItem, bool fromAnimal, string bodyPart);
     // Getters
-    string get_fromAnimal() const;
+    bool get_fromAnimal() const;
     string get_bodyPart() const;
 
     // Setters
-    void set_fromAnimal(string);
+    void set_fromAnimal(bool a);
     void set_bodyPart(string);
 
     // Methods
     void print() override;
 
     // Destructor
-    ~Meat() override;
+    ~Meat() ;
 };
 
 #endif

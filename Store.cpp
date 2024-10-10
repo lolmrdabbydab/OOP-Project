@@ -6,14 +6,11 @@
 #include "Printable.h"
 #include "StoreBase.h"
 #include "Store.h"
-
+#include "Item.h"
 using namespace std;
 
 // Constructors
-Store::Store(int numDifferentItem, map<string, Item*> inventory, int currentDay, int numCustomer, double balance, double rating, double target)
-    : StoreBase(numDifferentItem, inventory), currentDay(currentDay), numCustomer(numCustomer), balance(balance), rating(rating), target(target) {}
-
-Store::Store() : Store(10, map<string, Item*>(), 1, 1, 30.0, 5, 10) {} // Need to set Default Inventory
+Store::Store() : StoreBase() {} 
 
 // Getters
 int Store::get_currentDay() const { return currentDay; }
@@ -28,6 +25,16 @@ void Store::set_numCustomer(int numCustomer) { this->numCustomer = numCustomer; 
 void Store::set_balance(double balance) { this->balance = balance; }
 void Store::set_rating(double rating) { this->rating = rating; }
 void Store::set_target(double target) { this->target = target; }
+
+void Store::updateStore()
+{
+    std::map<std::string,Item*> _inventory = this->get_inventory();
+    for (auto i = _inventory.begin();i!= _inventory.end();i++){
+        if(i->second->get_isPerishableItem()){
+            i->second-> updateItem();
+        }   
+    }
+}
 
 // Methods
 void Store::print() {}

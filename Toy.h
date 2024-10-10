@@ -12,26 +12,26 @@ class Toy : public Item
 {
 private:
     string toyType;
-    string minAgeRestriction;
+    int minAgeRestriction;
 
 public:
     // Constructors
-    Toy(int numItem, double price, string brand, string toyType, string minAgeRestriction);
-    Toy();
+    Toy(int numItem, double price, string brand, bool isPerishable ,string toyType, int minAgeRestriction);
 
     // Getters
     string get_toyType() const;
-    string get_minAgeRestriction() const;
+    int get_minAgeRestriction() const;
 
     // Setters
     void set_toyType(string);
-    void set_minAgeRestriction(string);
+    void set_minAgeRestriction(int);
 
     // Methods
     void print() override;
+    void changeItem(int n);
 
     // Destructor
-    ~Toy() override;
+    ~Toy() ;
 };
 
 #endif

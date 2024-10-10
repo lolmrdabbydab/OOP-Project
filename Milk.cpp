@@ -10,9 +10,10 @@
 using namespace std;
 
 // Constructors
-Milk::Milk(int numItem, double price, string brand, int shelfLifeInDay, vector<int> expirationList, string milkSource, string milkType) 
-    : PerishableItem(numItem, price, brand, shelfLifeInDay, expirationList), milkSource(milkSource), milkType(milkType) {}
-Milk::Milk() : Milk(0, 0.0, "NaN", 0, vector<int>(), "NaN", "NaN") {}
+Milk::Milk(int numItem, double price, string brand, bool isPerishableItem, int shelfLifeInDay, string milkSource, string milkType):PerishableItem(numItem,price,brand,isPerishableItem,shelfLifeInDay),milkSource(milkSource),milkType(milkType)
+{
+}
+
 
 // Getters
 string Milk::get_milkSource() const { return milkSource; }
