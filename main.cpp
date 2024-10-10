@@ -5,6 +5,7 @@
 #include <limits>
 #include <ctime>
 #include <vector>
+
 #include "Printable.h"
 #include "StoreBase.h"
 #include "Store.h"
@@ -17,11 +18,16 @@
 #include "Soap.h"
 #include "Toy.h"
 
-// g++ main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp -o a
+// g++ --std=c++11 main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp -o a
+// clang++ --std=c++11 main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp -o a
 
 int main()
 {
-    std::cout << "Welcome to Retail Simulator game" << std::endl;
+    system("clear");
+
+    std::cout << "-= Welcome to The Retail Simulator Game =-" << std::endl;
+    // Introduction Prompt
+
     bool running = true;
     std::ifstream ReadFile("data.txt");
     std::string haveAccount;
@@ -86,19 +92,24 @@ int main()
     while (running)
     {
         std::srand(std::time(nullptr));
-        std::cout << "Welcome to day " << currentDay << std::endl;
-        std::cout << "Current Balance: " << balance << std::endl;
-        std::cout << "Balance Target:" << target << std::endl;
+        std::cout << "\n-------------------------------" << std::endl;
+        std::cout << "\tWelcome to day " << currentDay << std::endl;
+        std::cout << "-------------------------------\n"
+                  << std::endl;
+        std::cout << "* Current Balance: $" << balance << std::endl;
+        std::cout << "* Balance Target: $" << target << std::endl;
+        std::cout << "-------------------------------\n"
+                  << std::endl;
         customerNumber += currentDay / 5;
         double *itemsCosts = new double[10];
         itemsCosts = suppliant.get_costList();
-        std::cout << "Buying goods for day " << currentDay << std::endl;
-        std::cout << "*******************" << std::endl;
+        std::cout << "-----> Buying goods for day " << currentDay << " <-----" << std::endl;
+        std::cout << "************************************" << std::endl;
         suppliant.print();
         while (true)
         {
             int number;
-            std::cout << "Please choose items to buy(1-10)(other number for stop buying): ";
+            std::cout << "\nPlease choose items to buy (1-10) (Enter other numbers to stop purchasing): ";
             while (!(std::cin >> number))
             {
                 std::cout << "Invalid input type. Please enter an integer(1-10): ";
@@ -133,20 +144,29 @@ int main()
                         i->second->change_numItem(amount);
                         store.print();
                         balance -= suppliant.get_costList()[number] * amount;
-                        std::cout << "Current Balance: " << balance << std::endl;
+                        std::cout << "\n* Remaining Balance: $" << balance << " *" << std::endl;
                         break;
                     }
                 }
             }
         }
+
+        sleep(1);
+
+        std::cout << "\n========--------- " << "Simulating Day " << store.get_currentDay() << " ---------========" << std::endl;
+
         sleep(2);
+
         for (int i = 0; i < customerNumber; i++)
         {
             int n = std::rand() % currentDay + 1;
             int good = std::rand() % 10;
-            std::cout << "\nCustomer " << i + 1 << " want to buy " << n <<" "<< suppliant.get_itemNames()[good] << std::endl;
+
+            std::cout << "\n----> Customer (" << i + 1 << ") want to buy \"" << n << " " << suppliant.get_itemNames()[good] << "\"" << std::endl;
+
             std::map<string, Item *> itemMap;
             itemMap = store.get_inventory();
+
             for (auto i = itemMap.begin(); i != itemMap.end(); i++)
             {
                 if (i->first == itemsName[good])
@@ -176,15 +196,21 @@ int main()
             {
                 rating = 0;
             }
-            std::cout << "Balance: " << balance << std::endl;
-            std::cout << "Rating: " << rating << std::endl;
+
+            std::cout << "\n=======-------- Store Status (End of Day " << store.get_currentDay() << ") --------=======\n"
+                      << endl;
+            std::cout << "* Balance: $" << balance << std::endl;
+            std::cout << "* Rating: $" << rating << std::endl;
             sleep(2);
         }
+
+        std::cout << "\n=======-------- Final Verdict --------=======\n"
+                  << endl;
         if (balance < target)
         {
             std::ofstream MyFile("data.txt");
             MyFile << 0;
-            std::cout << "You can not meet the target, you are lose!!!" << std::endl;
+            std::cout << "----> You failed to meet Day " << store.get_currentDay() << " target balance\n----> Your store faces bankruptcy!!!" << std::endl;
             running = false;
             MyFile.close();
         }
@@ -192,21 +218,23 @@ int main()
         {
             std::ofstream MyFile("data.txt");
             MyFile << 0;
-            std::cout << "Your rating is 0, you are lose!!!" << std::endl;
+            std::cout << "----> Your store rating reaches 0. Nobody wants to buy from you and you closed down!" << std::endl;
             running = false;
             MyFile.close();
         }
         else
         {
-            std::cout << "Enter number for choice: " << std::endl;
+            std::cout << "----> Your made it through Day " << store.get_currentDay() << "\n\nChose one of the following option to proceed: " << std::endl;
             std::cout << "1. Play the next day" << std::endl;
             std::cout << "2. Save and exit" << std::endl;
+            std::cout << "\nHow would you like to proceed (Enter 1 or 2): ";
+
             int choice;
             while (true)
             {
-                while (!(std::cin >> choice))
+                while (!(std::cin >> choice) || (choice != 1 && choice != 2))
                 {
-                    std::cout << "Invalid input type. Please enter an integer(1-2): ";
+                    std::cout << "Invalid input type. Please enter an integer (1 or 2): ";
                     std::cin.clear();
                     std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
@@ -229,10 +257,10 @@ int main()
                 MyFile << customerNumber << std::endl;
                 for (auto i = itemMap.begin(); i != itemMap.end(); i++)
                 {
-                    if (i->second->get_isPerishableItem()==true)
+                    if (i->second->get_isPerishableItem() == true)
                     {
                         int n = i->second->get_shelfLifeInDay();
-                        std::cout<<n<<std::endl;
+                        std::cout << n << std::endl;
                         int *numberOfItem = i->second->get_expirationList();
                         MyFile << n << " " << i->second->get_numItem() << " ";
                         for (int j = 0; j < n; j++)
@@ -248,7 +276,7 @@ int main()
                 }
                 MyFile.close();
                 running = false;
-                std::cout << "Saved successfully!!!" << std::endl;
+                std::cout << "Game Status Saved successfully!!!" << std::endl;
             }
         }
         suppliant.updateCost();
@@ -257,5 +285,6 @@ int main()
         target += currentDay + 5 * (currentDay / 5);
     }
     // delete[] itemsName;
+
     return 0;
 }
