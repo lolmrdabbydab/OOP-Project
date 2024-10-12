@@ -25,7 +25,7 @@ using namespace std;
 
 int main()
 {
-    //system("clear");
+    system("clear");
 
     /* -------------------------
         -= Read Data.txt File =-
@@ -274,7 +274,7 @@ int main()
 
         cout << "\n=======-------- Final Verdict --------=======\n"
              << endl;
-        if (balance < target)
+        if (balance < target) // Fail due having less money than target
         {
             ofstream MyFile("data.txt");
             MyFile << 0;
@@ -283,7 +283,7 @@ int main()
             cout << "----> You failed to meet Day " << store.get_currentDay() << " target balance of $" << store.get_target() << "\n----> Your store faces bankruptcy!!!" << endl;
             running = false;
         }
-        else if (rating <= 0)
+        else if (rating <= 0) // Fail due having bad rating (<=0)
         {
             ofstream MyFile("data.txt");
             MyFile << 0;
@@ -292,7 +292,7 @@ int main()
             cout << "----> Your store rating reaches 0. Nobody wants to buy from you and you closed down!" << endl;
             running = false;
         }
-        else
+        else // Survived the day
         {
             cout << "----> You made it through Day " << store.get_currentDay() << endl;
             cout << "\nChose one of the following option to proceed: " << endl;
@@ -301,7 +301,7 @@ int main()
             cout << "\nHow would you like to proceed (Enter 1 or 2): ";
 
             int choice;
-            while (true)
+            while (true) // Progression option
             {
                 if (cin >> choice && (choice == 1 || choice == 2))
                 {
@@ -336,10 +336,6 @@ int main()
                 MyFile << store.get_numCustomer() << endl;
 
                 map<string, Item*> inventory = store.get_inventory();
-
-                /* ----------------------------
-                -= Testing Inventory =-
-                ---------------------------- */
 
                 /* -----------------------------------
                 -= Save Store Inventory to Data.txt =-
