@@ -2,6 +2,7 @@
 #define STOREBASE_H
 
 #include <iostream>
+#include <map>
 
 #include "Printable.h"
 #include "Item.h"
@@ -11,13 +12,12 @@
 #include "Milk.h"
 #include "Toy.h"
 #include "Soap.h"
-#include <map>
 
 class StoreBase : public Printable
 {
 private:
     int numDifferentItem;
-    std::map<std::string, Item *> inventory;
+    std::map<std::string, Item*> inventory;
 
 protected:
     std::string itemNames[10] =
@@ -31,19 +31,27 @@ protected:
             "PlayDough Sand",
             "Lego Figure",
             "Dove Shampoo",
-            "Dove Body Wash"};
+            "Dove Body Wash"
+        };
 
 public:
+    // Constructor
     StoreBase();
-    int get_numDifferentItem();
-    std::map<std::string, Item *> get_inventory();
 
+    // Getters
+    int get_numDifferentItem();
+    std::map<std::string, Item*> get_inventory();
+
+    // Setters
     void set_numDifferentItem(int n);
-    void set_inventory(std::map<std::string, Item *>);
+    void set_inventory(std::map<std::string, Item*>);
+    
+    // Methods
     void change_numDifferentItem(int n);
-    std::string *get_itemNames();
+    std::string* get_itemNames();
     virtual void print();
 
+    // Destructor
     ~StoreBase();
 };
 

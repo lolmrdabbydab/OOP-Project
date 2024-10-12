@@ -240,7 +240,7 @@ int main()
         {
             std::ofstream MyFile("data.txt");
             MyFile << 0;
-            std::cout << "----> You failed to meet Day " << store.get_currentDay() << " target balance\n----> Your store faces bankruptcy!!!" << std::endl;
+            std::cout << "----> You failed to meet Day " << store.get_currentDay() << " target balance of $" << store.get_target() << "\n----> Your store faces bankruptcy!!!" << std::endl;
             running = false;
             MyFile.close();
         }
