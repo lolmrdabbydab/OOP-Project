@@ -23,10 +23,10 @@ StoreBase::StoreBase()
     Item *item5 = new Meat(0, 8.6, "", 3, true, "Chicken", "Wing");
     this->inventory[itemNames[4]] = item5;
 
-    Item *item4 = new Milk(0, 5, "", true, 5, "Almond", "vegan");
+    Item *item4 = new Milk(0, 5, "", true, 5, "Almond", "Vegan");
     this->inventory[itemNames[3]] = item4;
 
-    Item *item3 = new Milk(0, 5, "", true, 5, "Cow", "non-vegan");
+    Item *item3 = new Milk(0, 5, "", true, 5, "Cow", "Non-vegan");
     this->inventory[itemNames[2]] = item3;
 
     Item *item2 = new Egg(0, 6, "", 7, true, true, "Duck");

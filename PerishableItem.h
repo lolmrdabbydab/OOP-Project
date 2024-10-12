@@ -8,7 +8,7 @@ class PerishableItem : public Item
 {
 private:
     int shelfLifeInDay;
-    int *expirationList;
+    int* expirationList;
 
 public:
     // Constructors

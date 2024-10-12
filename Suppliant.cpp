@@ -45,7 +45,8 @@ void Suppliant::print()
 {
     std::cout << "************************************" << std::endl;
     std::cout << "\tCosts of Today's Goods" << std::endl;
-    std::cout << "************************************\n" << std::endl;
+    std::cout << "************************************\n"
+              << std::endl;
     for (int i = 0; i < 10; i++)
     {
         std::cout << i + 1 << ". " << itemNames[i] << ": $" << costList[i] << std::endl;
