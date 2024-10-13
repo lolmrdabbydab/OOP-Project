@@ -40,7 +40,9 @@ int main()
     ------------------------- */
     Suppliant suppliant = Suppliant();
     string *itemsName = new string[10];
-    itemsName = suppliant.get_itemNames();
+    for (int j = 0;j<10;j++){
+        itemsName[j] = suppliant.get_itemNames()[j];
+    }
 
     /* -------------------------
         -= Set-up Store =-
@@ -335,6 +337,7 @@ int main()
             store.updateStore();
             store.set_balance(balance);
             store.set_rating(rating);
+            delete []costList;
             currentDay += 1;
             target += currentDay + 5 * (currentDay / 5);
 
@@ -359,7 +362,6 @@ int main()
                 ----------------------------------- */
                 for (auto i = inventory.begin(); i != inventory.end(); i++)
                 {
-                    std::cout<<i->second->get_numItem()<<std::endl;
                     if (i->second->get_isPerishableItem()) // Save perishable Item data
                     {
                         int shelfLifeInDay = i->second->get_shelfLifeInDay();
@@ -404,7 +406,7 @@ int main()
             }
         }
     }
-    // delete[] itemsName;
+    delete[] itemsName;
 
     return 0;
 }
