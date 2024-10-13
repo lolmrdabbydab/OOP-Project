@@ -26,7 +26,7 @@ public:
 
     // Methods
     void print() override;
-    void change_numItem(int n);
+    void change_numItem(int n) override;
 
     // Destructor
     ~Soap() ;

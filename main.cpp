@@ -5,6 +5,8 @@
 #include <limits>
 #include <ctime>
 #include <vector>
+#include <map>
+
 #include "Printable.h"
 #include "StoreBase.h"
 #include "Store.h"
@@ -17,245 +19,392 @@
 #include "Soap.h"
 #include "Toy.h"
 
-// g++ main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp -o a
+using namespace std;
+
+// g++ --std=c++11 main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp -o a
+// clang++ --std=c++11 main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp -o a
 
 int main()
 {
-    std::cout << "Welcome to Retail Simulator game" << std::endl;
-    bool running = true;
-    std::ifstream ReadFile("data.txt");
-    std::string haveAccount;
-    std::getline(ReadFile, haveAccount);
+    system("clear");
 
+    /* -------------------------
+        -= Read Data.txt File =-
+    ------------------------- */
+    string haveAccount;
+    ifstream ReadFile("data.txt"); // Assign found "data.txt" to variable: ReadFile
+    getline(ReadFile, haveAccount);
+
+    /* -------------------------
+        -= Set-up Suppliant =-
+    ------------------------- */
     Suppliant suppliant = Suppliant();
-    std::string *itemsName = new std::string[10];
+    string *itemsName = new string[10];
     itemsName = suppliant.get_itemNames();
+
+    /* -------------------------
+        -= Set-up Store =-
+    ------------------------- */
     Store store = Store();
+    std::map<std::string, Item *> inventory;
+    inventory = store.get_inventory();
+    // for (auto i = inventory.begin();i!= inventory.end();i++){
+    //     std::cout<<i->first<<std::endl;
+    //     std::cout<<i->second->get_shelfLifeInDay()<<std::endl;
+    // }
     if (stoi(haveAccount) == 1)
     {
-        std::string cd;
-        std::getline(ReadFile, cd);
-        store.set_currentDay(stoi(cd));
-        std::string b;
-        std::getline(ReadFile, b);
-        store.set_balance(stod(b));
-        std::string r;
-        std::getline(ReadFile, r);
-        store.set_rating(stod(r));
-        std::string cn;
-        std::getline(ReadFile, cn);
-        store.set_numCustomer(stoi(cn));
+        suppliant.updateCost(); // Update costList (Saved -> Made past Day 1 -> Default costList must be change)
+
+        /* -------------------------
+        -= Set-up Store Status =-
+        ------------------------- */
+        string currentDay;
+        getline(ReadFile, currentDay);
+        store.set_currentDay(stoi(currentDay));
+
+        string balance;
+        getline(ReadFile, balance);
+        store.set_balance(stod(balance));
+
+        string rating;
+        getline(ReadFile, rating);
+        store.set_rating(stod(rating));
+
+        string target;
+        getline(ReadFile, target);
+        store.set_target(stod(target));
+
+        string numCustomer;
+        getline(ReadFile, numCustomer);
+        store.set_numCustomer(stoi(numCustomer));
+
+        /* -------------------------
+        -= Set-up Store's Inventory =-
+        ------------------------- */
         for (int i = 0; i < 10; i++)
         {
-            if (i > 5)
+            string line;
+            string word;
+            vector<string> information;
+
+            getline(ReadFile, line);
+            stringstream wordsInLine(line);
+
+            while (wordsInLine >> word)
             {
-                std::string n;
-                std::getline(ReadFile, n);
-                const std::string itemName = itemsName[i];
-                store.get_inventory()[itemName]->set_numItem(stoi(n));
+                information.push_back(word);
             }
-            else
+            if (store.get_inventory()[itemsName[stoi(information.at(0))]]->get_isPerishableItem() == false) // For Non-Perishable Item
             {
-                std::string line;
-                std::getline(ReadFile, line);
-                std::stringstream ss1(line);
-                std::string word;
-                vector<string> information;
-                while (ss1 >> word)
-                    information.push_back(word);
-                int expirationLength = stoi(information.at(0));
-                const std::string itemName = itemsName[i];
-                store.get_inventory()[itemName]->set_numItem(stoi(information.at(1)));
-                int *expirationList = new int[expirationLength];
-                for (size_t j = 2; information.size(); j++)
+                store.get_inventory()[itemsName[stoi(information.at(0))]]->set_numItem(stoi(information.at(1)));
+            }
+            else // For Perishable Item
+            {
+
+                /* ----------------------------------------------------
+                -= Set-up Perishable Item's numItem & expirationList =-
+                ---------------------------------------------------- */
+                store.get_inventory()[itemsName[stoi(information.at(0))]]->set_numItem(stoi(information.at(1)));
+
+                int shelfLifeInDay = store.get_inventory()[itemsName[stoi(information.at(0))]]->get_shelfLifeInDay();
+                int *expirationList = new int[shelfLifeInDay];
+                int index = 0;
+
+                for (int j = 2; j < information.size(); j++)
                 {
-                    expirationList[j] = stoi(information[j]);
+                    expirationList[index] = stoi(information[j]);
+                    index++;
                 }
-                store.get_inventory()[itemsName[i]]->set_expirationList(expirationList);
+                store.get_inventory()[itemsName[stoi(information.at(0))]]->set_expirationList(expirationList);
+
                 delete[] expirationList;
             }
         }
     }
     ReadFile.close();
+
+    /* -----------------------------
+    -= Set-Up Store Data Variable =-
+    ----------------------------- */
     double balance = store.get_balance();
     double rating = store.get_rating();
     double target = store.get_target();
     int currentDay = store.get_currentDay();
-    int customerNumber = store.get_numCustomer();
+    int numCustomer = store.get_numCustomer();
 
+    /* -------------------------
+    -= Finish Set-up & Run Game =-
+    ------------------------- */
+    cout << "-= Welcome to The Retail Simulator Game =-" << endl;
+    // Introduction Prompt
+
+    /* -------------------------
+    -= User Store Purchasing =-
+    ------------------------- */
+    bool running = true;
     while (running)
     {
-        std::srand(std::time(nullptr));
-        std::cout << "Welcome to day " << currentDay << std::endl;
-        std::cout << "Current Balance: " << balance << std::endl;
-        std::cout << "Balance Target:" << target << std::endl;
-        customerNumber += currentDay / 5;
-        double *itemsCosts = new double[10];
-        itemsCosts = suppliant.get_costList();
-        std::cout << "Buying goods for day " << currentDay << std::endl;
-        std::cout << "*******************" << std::endl;
+        srand(time(nullptr)); // Randomize Time
+        cout << "\n-------------------------------" << endl;
+        cout << "\tWelcome to day " << currentDay << endl;
+        cout << "-------------------------------\n"
+             << endl;
+        cout << "* Current Balance: $" << balance << endl;
+        cout << "* Balance Target: $" << target << endl;
+        cout << "-------------------------------\n"
+             << endl;
+
+        double *costList = new double[10];
+        for (int j = 0;j<10;j++){
+            costList[j] = suppliant.get_costList()[j];
+        }
+        cout << "-----> Buying goods for day " << currentDay << " <-----" << endl;
         suppliant.print();
+
+        /* -------------------------
+        -= Purchase Input Handling =-
+        ------------------------- */
         while (true)
         {
-            int number;
-            std::cout << "Please choose items to buy(1-10)(other number for stop buying): ";
-            while (!(std::cin >> number))
+            /* -------------------------
+                -= Choosing Item =-
+           ------------------------- */
+            int itemNum;
+            int itemIndex;
+            cout << "\nPlease choose items to buy (1-10) (Enter any other numbers to stop purchase): ";
+
+            while (!(cin >> itemNum)) // Loop until an int input
             {
-                std::cout << "Invalid input type. Please enter an integer(1-10): ";
-                std::cin.clear();
-                std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid input type. Please enter an integer from (1-10): ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
-            if (number < 1 || number > 10)
+
+            if (itemNum < 1 || itemNum > 10) // Stop input request if input number not in range
             {
                 break;
             }
-            number -= 1;
+            itemIndex = itemNum - 1;
+
+            /* -------------------------
+             -= Choosing Item Amount =-
+           ------------------------- */
             int amount;
-            std::cout << "Amount: ";
-            while (!(std::cin >> amount))
+            cout << "Amount: ";
+
+            while (!(cin >> amount)) // Loop until an int input
             {
-                std::cout << "Invalid input type. Please enter an integer: ";
-                std::cin.clear();
-                std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid input type. Please enter an integer: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
-            if (amount * itemsCosts[number] > balance)
+
+            if (amount * costList[itemIndex] > balance) // Insufficient fund for purchase
             {
-                std::cout << "Not enough money!!!" << std::endl;
+                cout << "Not enough money!!!" << endl;
             }
-            else
+            else // Add purchase to Store's inventory
             {
-                std::string itemName = itemsName[number];
-                std::map<std::string, Item *> inventory = store.get_inventory();
-                for (auto i = inventory.begin(); i != inventory.end(); i++)
+                string itemName = itemsName[itemIndex];
+                map<string, Item *> inventory = store.get_inventory();
+
+                auto itr = inventory.find(itemName);
+                if (itr != inventory.end()) // Check if itemName is found
                 {
-                    if (i->first == itemName)
-                    {
-                        i->second->change_numItem(amount);
-                        store.print();
-                        balance -= suppliant.get_costList()[number] * amount;
-                        std::cout << "Current Balance: " << balance << std::endl;
-                        break;
+                    itr->second->change_numItem(amount);
+                    if (itr->second->get_isPerishableItem()){
+                        int expLength = itr->second->get_shelfLifeInDay();
+                        int * tmp = new int[expLength];
+                        for (int j = 0;j<expLength;j++){
+                            tmp[j] = itr->second->get_expirationList()[j];
+                        }
+                        tmp[expLength-1] += amount;
+                        itr->second->set_expirationList(tmp);
+                        delete[] tmp;
                     }
+                    balance -= costList[itemIndex] * amount;
+                    cout << "\n* Remaining Balance: $" << balance << " *" << endl;
                 }
             }
         }
+
+        /* -------------------------
+                -= Run Day =-
+        ------------------------- */
+
+        sleep(1);
+
+        cout << "\n========--------- " << "Simulating Day " << store.get_currentDay() << " ---------========" << endl;
+
         sleep(2);
-        for (int i = 0; i < customerNumber; i++)
+
+        /* -------------------------
+          -= Randomise Purchase =-
+        ------------------------- */
+        for (int i = 0; i < numCustomer; i++)
         {
-            int n = std::rand() % currentDay + 1;
-            int good = std::rand() % 10;
-            std::cout << "\nCustomer " << i + 1 << " want to buy " << n <<" "<< suppliant.get_itemNames()[good] << std::endl;
-            std::map<string, Item *> itemMap;
-            itemMap = store.get_inventory();
-            for (auto i = itemMap.begin(); i != itemMap.end(); i++)
+            int good = rand() % 10;                   // Randomise Good (Index)
+            int numGoodBuy = rand() % currentDay + 1; // Randomise Amount of Good to Buy
+
+            cout << "\n----> Customer (" << i + 1 << ") want to buy \"" << numGoodBuy << " " << suppliant.get_itemNames()[good] << "\"" << endl;
+
+            /* ------------------------------------------
+            -= Update Inventory & Rating after Purchase =-
+            ------------------------------------------ */
+            map<string, Item *> inventory = store.get_inventory();
+            auto itr = inventory.find(itemsName[good]);
+
+            if (itr != inventory.end()) // Check if good is found in inventory
             {
-                if (i->first == itemsName[good])
+                Item *item = itr->second;
+                int availableItems = item->get_numItem();
+
+                if (availableItems >= numGoodBuy) // If there's enough goods in stock
                 {
-                    if (i->second->get_numItem() >= n)
-                    {
-                        balance += n * i->second->get_price();
-                        i->second->change_numItem(-n);
-                        i->second->sellItem(n);
-                        rating += 0.3;
-                        if (rating > 5)
-                        {
-                            rating = 5;
-                        }
-                    }
-                    else
-                    {
-                        rating -= 0.5 * (n - i->second->get_numItem());
-                        balance += (i->second->get_price()) * (i->second->get_numItem());
-                        i->second->sellItem(-1);
-                        itemMap[itemsName[good]]->set_numItem(0);
-                    }
-                    break;
+                    balance += numGoodBuy * item->get_price();
+                    item->change_numItem(-numGoodBuy);
+                    item->sellItem(numGoodBuy);
+                    rating = min(rating + 0.3, 5.0); // Ensure rating doesn't exceed 5
+                }
+                else // If there's not enough goods in stock
+                {
+                    rating -= 0.5 * (numGoodBuy - availableItems); // Rating drop -> 0.5 * amount of unavaliable goods
+                    rating = max(rating, 0.0);                     // Ensure rating doesn't drop below 0
+                    balance += availableItems * item->get_price();
+                    item->sellItem(item->get_numItem()); // Sell all avaliable stock
+                    item->set_numItem(0);
                 }
             }
-            if (rating < 0)
-            {
-                rating = 0;
-            }
-            std::cout << "Balance: " << balance << std::endl;
-            std::cout << "Rating: " << rating << std::endl;
+
+            /* -------------------------
+                -= Day Summary =-
+            ------------------------- */
+            cout << "\n=======-------- Store Status (End of Day " << store.get_currentDay() << ") --------=======\n"
+                 << endl;
+            cout << "* Balance: $" << balance << endl;
+            cout << "* Rating (Stars): " << rating << endl;
             sleep(2);
         }
-        if (balance < target)
+
+        cout << "\n=======-------- Final Verdict --------=======\n"
+             << endl;
+        if (balance < target) // Fail due having less money than target
         {
-            std::ofstream MyFile("data.txt");
+            ofstream MyFile("data.txt");
             MyFile << 0;
-            std::cout << "You can not meet the target, you are lose!!!" << std::endl;
-            running = false;
             MyFile.close();
+
+            cout << "----> You failed to meet Day " << store.get_currentDay() << " target balance of $" << store.get_target() << "\n----> Your store faces bankruptcy!!!" << endl;
+            running = false;
         }
-        else if (rating <= 0)
+        else if (rating <= 0) // Fail due having bad rating (<=0)
         {
-            std::ofstream MyFile("data.txt");
+            ofstream MyFile("data.txt");
             MyFile << 0;
-            std::cout << "Your rating is 0, you are lose!!!" << std::endl;
-            running = false;
             MyFile.close();
+
+            cout << "----> Your store rating reaches 0. Nobody wants to buy from you and you closed down!" << endl;
+            running = false;
         }
-        else
+        else // Survived the day
         {
-            std::cout << "Enter number for choice: " << std::endl;
-            std::cout << "1. Play the next day" << std::endl;
-            std::cout << "2. Save and exit" << std::endl;
+            cout << "----> You made it through Day " << store.get_currentDay() << endl;
+            cout << "\nChose one of the following option to proceed: " << endl;
+            cout << "\t1. Play the next day" << endl;
+            cout << "\t2. Save and exit" << endl;
+            cout << "\nHow would you like to proceed (Enter 1 or 2): ";
+
             int choice;
-            while (true)
+            while (true) // Progression option
             {
-                while (!(std::cin >> choice))
-                {
-                    std::cout << "Invalid input type. Please enter an integer(1-2): ";
-                    std::cin.clear();
-                    std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                }
-                if (choice == 1 || choice == 2)
+                if (cin >> choice && (choice == 1 || choice == 2))
                 {
                     break;
                 }
+
+                cout << "Invalid input type. Please enter an integer (1 or 2): ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
+
+            /* ----------------------------
+            -= Update Suppliant & Store =-
+            ---------------------------- */
+            suppliant.updateCost();
+            store.updateStore();
+            store.set_balance(balance);
+            store.set_rating(rating);
+            currentDay += 1;
+            target += currentDay + 5 * (currentDay / 5);
+
+            /* ----------------------------
+            -= Save Progress to Data.txt =-
+            ---------------------------- */
+
             if (choice == 2)
             {
-                std::map<string, Item *> itemMap;
-                store.updateStore();
-                itemMap = store.get_inventory();
-                std::ofstream MyFile("data.txt");
-                MyFile << 1 << std::endl;
-                MyFile << currentDay + 1 << std::endl;
-                MyFile << balance << std::endl;
-                MyFile << rating << std::endl;
-                target += currentDay + 5 * (currentDay / 5);
-                MyFile << customerNumber << std::endl;
-                for (auto i = itemMap.begin(); i != itemMap.end(); i++)
+                ofstream MyFile("data.txt");
+                MyFile << 1 << endl;
+                MyFile << store.get_currentDay() << endl;
+                MyFile << store.get_balance() << endl;
+                MyFile << store.get_rating() << endl;
+                MyFile << store.get_target() << endl;
+                MyFile << store.get_numCustomer() << endl;
+
+                map<string, Item *> inventory = store.get_inventory();
+
+                /* -----------------------------------
+                -= Save Store Inventory to Data.txt =-
+                ----------------------------------- */
+                for (auto i = inventory.begin(); i != inventory.end(); i++)
                 {
-                    if (i->second->get_isPerishableItem()==true)
+                    std::cout<<i->second->get_numItem()<<std::endl;
+                    if (i->second->get_isPerishableItem()) // Save perishable Item data
                     {
-                        int n = i->second->get_shelfLifeInDay();
-                        std::cout<<n<<std::endl;
-                        int *numberOfItem = i->second->get_expirationList();
-                        MyFile << n << " " << i->second->get_numItem() << " ";
-                        for (int j = 0; j < n; j++)
+                        int shelfLifeInDay = i->second->get_shelfLifeInDay();
+                        int *expirationList = new int[10];
+                        for (int j = 0; j < shelfLifeInDay; j++)
                         {
-                            MyFile << numberOfItem[j] << " ";
+                            expirationList[j] = i->second->get_expirationList()[j];
                         }
+                        for (int j = 0; j < 10; j++)
+                        {
+                            if (itemsName[j] == i->first)
+                            {
+                                MyFile << j << " ";
+                                break;
+                            }
+                        }
+                        MyFile << i->second->get_numItem() << " ";
+                        for (int j = 0; j < shelfLifeInDay; j++)
+                        {
+                            MyFile << expirationList[j] << " ";
+                        }
+                        delete[] expirationList;
                     }
-                    else
+                    else // Save non-perishable Item data
                     {
+                        for (int j = 0; j < 10; j++)
+                        {
+                            if (itemsName[j] == i->first)
+                            {
+                                MyFile << j << " ";
+                                break;
+                            }
+                        }
                         MyFile << i->second->get_numItem();
                     }
                     MyFile << "\n";
                 }
                 MyFile.close();
+
+                cout << "Game Status Saved successfully!!!" << endl;
                 running = false;
-                std::cout << "Saved successfully!!!" << std::endl;
             }
         }
-        suppliant.updateCost();
-        store.updateStore();
-        currentDay += 1;
-        target += currentDay + 5 * (currentDay / 5);
     }
     // delete[] itemsName;
+
     return 0;
 }

@@ -29,6 +29,10 @@ push:
 	git push
 
 clean:
-	@rm -f $(TARGET) $(OBJS)
+	@rm -f $(TARGET)
 
 # Automated Run Test
+test: test.cpp
+	@$(CXX) $(CXXFLAGS) test.cpp -o $(TARGET)
+	@./$(TARGET)
+	@make clean
