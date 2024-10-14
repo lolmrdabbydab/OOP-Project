@@ -136,11 +136,32 @@ int main()
     int currentDay = store.get_currentDay();
     int numCustomer = store.get_numCustomer();
 
-    /* -------------------------
-    -= Finish Set-up & Run Game =-
-    ------------------------- */
+    /* -------------------------------------------------
+    -= Finish Set-up | Run Game | Introduction Prompt =-
+    ------------------------------------------------- */
+    string choice;
+
     cout << "-= Welcome to The Retail Simulator Game =-" << endl;
-    // Introduction Prompt
+    cout << "Would you like to see the game introduction? (y/n): ";
+
+    // Error handling for user input
+    while (!(cin >> choice) || (choice != "y" && choice != "n"))
+    {
+        cout << "Invalid input. Please enter (y/n): ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    if (choice == "y")
+    {
+        cout << "\nWelcome to the Retail Simulator Game!\n"
+             << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
+             << "Your goal is to maintain profitability and avoid bankruptcy!\n";
+    }
+    else
+    {
+        cout << "\nSkipping the game introduction.\n";
+    }
 
     /* -------------------------
     -= User Store Purchasing =-

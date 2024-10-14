@@ -13,14 +13,16 @@
 #include "Toy.h"
 #include "Soap.h"
 
+using namespace std;
+
 class StoreBase : public Printable
 {
 private:
     int numDifferentItem;
-    std::map<std::string, Item*> inventory;
+    map<string, Item*> inventory;
 
 protected:
-    std::string itemNames[10] =
+    string itemNames[10] =
         {
             "Dozen of Free Range Hens Egg",
             "Dozen of Cage Free Duck Egg",
@@ -40,15 +42,15 @@ public:
 
     // Getters
     int get_numDifferentItem();
-    std::map<std::string, Item*> get_inventory();
+    map<string, Item*> get_inventory();
+    string* get_itemNames();
 
     // Setters
     void set_numDifferentItem(int n);
-    void set_inventory(std::map<std::string, Item*>);
+    void set_inventory(map<string, Item*>);
     
     // Methods
-    void change_numDifferentItem(int n);
-    std::string* get_itemNames();
+    void change_numDifferentItem(int n); // Takes positive/negative value to adjust numDifferentItem variable ≠ Not setter
     virtual void print();
 
     // Destructor

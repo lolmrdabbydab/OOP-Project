@@ -24,8 +24,8 @@ public:
     
     // Methods
     virtual void print();
-    void sellItem(int n);
-    void updateItem();
+    void sellItem(int n); // Remove item count from expirationList
+    void updateItem(); // Update item count in expirationList and update numItem variable
     
     // Destructor
     ~PerishableItem();

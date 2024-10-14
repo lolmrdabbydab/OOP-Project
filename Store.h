@@ -39,7 +39,7 @@ public:
     void set_target(double);
 
     // Methods
-    void updateStore();
+    void updateStore(); // Increment day, target, numCustomer & expirationList
     void print() override;
 
     // Destructor

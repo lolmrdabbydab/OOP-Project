@@ -31,7 +31,7 @@ public:
 
     // Methods
     void print() override;
-    void updateCost();
+    void updateCost(); // Update costList with randomized cost for items to sell
     
     // Destructor
     ~Suppliant();

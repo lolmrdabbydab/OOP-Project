@@ -22,10 +22,7 @@ void Toy::set_minAgeRestriction(int minAgeRestriction) { this->minAgeRestriction
 
 // Methods
 void Toy::print() {}
-
-void Toy::changeItem(int n)
-{
-}
+void Toy::changeItem(int n) {}
 
 // Destructor
 Toy::~Toy() {}
