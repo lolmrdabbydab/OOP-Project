@@ -8,8 +8,8 @@
 using namespace std;
 
 // Constructors
-Item::Item(int numItem, double price, string brand,bool isPerishableItem) : numItem(numItem), price(price), brand(brand),isPerishableItem(isPerishableItem) {}
-Item::Item() : Item(0, 0, "NaN",false) {}
+Item::Item(int numItem, double price, string brand, bool isPerishableItem) : numItem(numItem), price(price), brand(brand), isPerishableItem(isPerishableItem) {}
+Item::Item() : Item(0, 0, "NaN", false) {}
 
 // Getters
 int Item::get_numItem() const { return numItem; }

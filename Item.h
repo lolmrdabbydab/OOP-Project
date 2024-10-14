@@ -41,8 +41,8 @@ public:
     virtual void updateItem();
 
     virtual int get_shelfLifeInDay();
-    virtual int* get_expirationList();
-    virtual void set_expirationList(int* n);
+    virtual int *get_expirationList();
+    virtual void set_expirationList(int *n);
 
     // Destructor
     ~Item();

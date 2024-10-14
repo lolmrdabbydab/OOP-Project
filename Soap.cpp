@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constructors
-Soap::Soap(int numItem, double price, string brand, bool isPerishableItem, string soapType):Item(numItem,price,brand,isPerishableItem),soapType(soapType)
+Soap::Soap(int numItem, double price, string brand, bool isPerishableItem, string soapType) : Item(numItem, price, brand, isPerishableItem), soapType(soapType)
 {
 }
 
@@ -21,9 +21,7 @@ void Soap::set_soapType(string soapType) { this->soapType = soapType; }
 // Methods
 void Soap::print() {}
 
-void Soap::change_numItem(int n)
-{
-}
+void Soap::change_numItem(int n) {}
 
 // Destructor
 Soap::~Soap() {}

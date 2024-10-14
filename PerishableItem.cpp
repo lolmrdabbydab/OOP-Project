@@ -34,7 +34,7 @@ void PerishableItem::sellItem(int n)
 
     for (int i = 0; i < shelfLifeInDay; i++) // Loop through avaliable stock
     {
-        if (n == 0) 
+        if (n == 0)
         {
             return;
         }
@@ -54,7 +54,7 @@ void PerishableItem::sellItem(int n)
 void PerishableItem::updateItem()
 {
     int count = 0;
-    for (int i = 0; i < shelfLifeInDay-1; i++)
+    for (int i = 0; i < shelfLifeInDay - 1; i++)
     {
         expirationList[i] = expirationList[i + 1];
         count += expirationList[i];

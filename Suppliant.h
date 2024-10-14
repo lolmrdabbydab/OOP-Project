@@ -22,8 +22,8 @@ public:
     Suppliant();
 
     // Getters
-    double* get_costRefList();
-    double* get_costList();
+    double *get_costRefList();
+    double *get_costList();
 
     // Setters
     void set_costRefList(double[10]);
@@ -32,7 +32,7 @@ public:
     // Methods
     void print() override;
     void updateCost(); // Update costList with randomized cost for items to sell
-    
+
     // Destructor
     ~Suppliant();
 };

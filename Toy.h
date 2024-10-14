@@ -16,7 +16,7 @@ private:
 
 public:
     // Constructors
-    Toy(int numItem, double price, string brand, bool isPerishable ,string toyType, int minAgeRestriction);
+    Toy(int numItem, double price, string brand, bool isPerishable, string toyType, int minAgeRestriction);
 
     // Getters
     string get_toyType() const;
@@ -31,7 +31,7 @@ public:
     void changeItem(int n);
 
     // Destructor
-    ~Toy() ;
+    ~Toy();
 };
 
 #endif

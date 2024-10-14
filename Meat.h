@@ -32,7 +32,7 @@ public:
     void print() override;
 
     // Destructor
-    ~Meat() ;
+    ~Meat();
 };
 
 #endif

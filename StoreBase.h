@@ -19,7 +19,7 @@ class StoreBase : public Printable
 {
 private:
     int numDifferentItem;
-    map<string, Item*> inventory;
+    map<string, Item *> inventory;
 
 protected:
     string itemNames[10] =
@@ -33,8 +33,7 @@ protected:
             "PlayDough Sand",
             "Lego Figure",
             "Dove Shampoo",
-            "Dove Body Wash"
-        };
+            "Dove Body Wash"};
 
 public:
     // Constructor
@@ -42,13 +41,13 @@ public:
 
     // Getters
     int get_numDifferentItem();
-    map<string, Item*> get_inventory();
-    string* get_itemNames();
+    map<string, Item *> get_inventory();
+    string *get_itemNames();
 
     // Setters
     void set_numDifferentItem(int n);
-    void set_inventory(map<string, Item*>);
-    
+    void set_inventory(map<string, Item *>);
+
     // Methods
     void change_numDifferentItem(int n); // Takes positive/negative value to adjust numDifferentItem variable ≠ Not setter
     virtual void print();

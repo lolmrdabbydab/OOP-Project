@@ -46,7 +46,7 @@ void Suppliant::print()
     cout << "************************************" << endl;
     cout << "\tCosts of Today's Goods" << endl;
     cout << "************************************\n"
-              << endl;
+         << endl;
     for (int i = 0; i < 10; i++)
     {
         cout << i + 1 << ". " << itemNames[i] << ": $" << costList[i] << endl;

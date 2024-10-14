@@ -33,7 +33,7 @@ void Store::updateStore()
     target += currentDay + 5 * (currentDay / 5);
     numCustomer += currentDay / 5; // numCustomer increase by 1 every 5 days
 
-    map<string, Item*> _inventory = this->get_inventory();
+    map<string, Item *> _inventory = this->get_inventory();
     for (auto i = _inventory.begin(); i != _inventory.end(); i++)
     {
         if (i->second->get_isPerishableItem())

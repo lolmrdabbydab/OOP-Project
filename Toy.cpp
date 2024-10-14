@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constructors
-Toy::Toy(int numItem, double price, string brand, bool isPerishable, string toyType, int minAgeRestriction):Item(numItem,price,brand,isPerishable),toyType(toyType),minAgeRestriction(minAgeRestriction)
+Toy::Toy(int numItem, double price, string brand, bool isPerishable, string toyType, int minAgeRestriction) : Item(numItem, price, brand, isPerishable), toyType(toyType), minAgeRestriction(minAgeRestriction)
 {
 }
 

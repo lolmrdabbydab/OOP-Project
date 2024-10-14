@@ -33,7 +33,7 @@ public:
     void print() override;
 
     // Destructors
-    ~Egg() ;
+    ~Egg();
 };
 
 #endif

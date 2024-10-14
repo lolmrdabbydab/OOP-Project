@@ -19,7 +19,7 @@ private:
 
 public:
     // Constructors
-    Milk(int numItem, double price, string brand, bool isPerishableItem,int shelfLifeInDay,  string milkSource, string milkType);
+    Milk(int numItem, double price, string brand, bool isPerishableItem, int shelfLifeInDay, string milkSource, string milkType);
 
     // Getters
     string get_milkSource() const;
@@ -33,7 +33,7 @@ public:
     void print() override;
 
     // Destructor
-    ~Milk() ;
+    ~Milk();
 };
 
 #endif

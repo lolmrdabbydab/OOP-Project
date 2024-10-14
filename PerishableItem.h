@@ -11,25 +11,25 @@ class PerishableItem : public Item
 {
 private:
     int shelfLifeInDay;
-    int* expirationList;
+    int *expirationList;
 
 public:
     // Constructors
     PerishableItem(int numItem, double price, string brand, bool isPerishable, int shelfLifeInDay);
-    
+
     // Getters
     int get_shelfLifeInDay();
     int *get_expirationList();
-    
+
     // Setters
     void set_shelfLifeInDay(int n);
-    void set_expirationList(int* nList);
-    
+    void set_expirationList(int *nList);
+
     // Methods
     virtual void print();
     void sellItem(int n); // Remove item count from expirationList
-    void updateItem(); // Update item count in expirationList and update numItem variable
-    
+    void updateItem();    // Update item count in expirationList and update numItem variable
+
     // Destructor
     ~PerishableItem();
 };
