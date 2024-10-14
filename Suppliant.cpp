@@ -43,23 +43,23 @@ void Suppliant::set_costList(double[10]) {}
 // Methods
 void Suppliant::print()
 {
-    std::cout << "************************************" << std::endl;
-    std::cout << "\tCosts of Today's Goods" << std::endl;
-    std::cout << "************************************\n"
-              << std::endl;
+    cout << "************************************" << endl;
+    cout << "\tCosts of Today's Goods" << endl;
+    cout << "************************************\n"
+              << endl;
     for (int i = 0; i < 10; i++)
     {
-        std::cout << i + 1 << ". " << itemNames[i] << ": $" << costList[i] << std::endl;
+        cout << i + 1 << ". " << itemNames[i] << ": $" << costList[i] << endl;
     }
     cout << "\n************************************" << endl;
 }
 
 void Suppliant::updateCost()
 {
-    std::srand(std::time(nullptr));
+    srand(time(nullptr));
     for (int i = 0; i < 10; i++)
     {
-        double rateChange = 0.5 + (std::rand() % 10) / 10.0;
+        double rateChange = 0.5 + (rand() % 10) / 10.0;
         costList[i] = costRefList[i] * rateChange;
     }
 }

@@ -1,5 +1,7 @@
 #include "StoreBase.h"
 
+using namespace std;
+
 // Constructors
 StoreBase::StoreBase()
 {
@@ -38,12 +40,12 @@ StoreBase::StoreBase()
 
 // Getters
 int StoreBase::get_numDifferentItem() { return this->numDifferentItem; }
-std::map<std::string, Item *> StoreBase::get_inventory() { return this->inventory; }
-std::string *StoreBase::get_itemNames() { return itemNames; }
+map<string, Item *> StoreBase::get_inventory() { return this->inventory; }
+string *StoreBase::get_itemNames() { return itemNames; }
 
 // Setters
 void StoreBase::set_numDifferentItem(int n) { this->numDifferentItem = n; }
-void StoreBase::set_inventory(std::map<std::string, Item *>) {}
+void StoreBase::set_inventory(map<string, Item *>) {}
 
 // Methods
 void StoreBase::change_numDifferentItem(int n) { this->numDifferentItem += n; }

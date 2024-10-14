@@ -1,9 +1,12 @@
 #include <iostream>
+
 #include "Item.h"
 #include "PerishableItem.h"
 
+using namespace std;
+
 // Constructor
-PerishableItem::PerishableItem(int numItem, double price, std::string brand, bool isPerishableItem, int shelfLifeInDay) : Item(numItem, price, brand, isPerishableItem), shelfLifeInDay(shelfLifeInDay)
+PerishableItem::PerishableItem(int numItem, double price, string brand, bool isPerishableItem, int shelfLifeInDay) : Item(numItem, price, brand, isPerishableItem), shelfLifeInDay(shelfLifeInDay)
 {
     this->expirationList = new int[shelfLifeInDay]();
 }

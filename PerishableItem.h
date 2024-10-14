@@ -4,6 +4,9 @@
 #include <iostream>
 #include "Item.h"
 #include "Printable.h"
+
+using namespace std;
+
 class PerishableItem : public Item
 {
 private:
@@ -12,7 +15,7 @@ private:
 
 public:
     // Constructors
-    PerishableItem(int numItem, double price, std::string brand, bool isPerishable, int shelfLifeInDay);
+    PerishableItem(int numItem, double price, string brand, bool isPerishable, int shelfLifeInDay);
     
     // Getters
     int get_shelfLifeInDay();
