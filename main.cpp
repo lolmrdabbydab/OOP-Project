@@ -40,7 +40,8 @@ int main()
     ------------------------- */
     Suppliant suppliant = Suppliant();
     string *itemsName = new string[10];
-    for (int j = 0;j<10;j++){
+    for (int j = 0; j < 10; j++)
+    {
         itemsName[j] = suppliant.get_itemNames()[j];
     }
 
@@ -48,11 +49,11 @@ int main()
         -= Set-up Store =-
     ------------------------- */
     Store store = Store();
-    std::map<std::string, Item *> inventory;
+    map<string, Item *> inventory;
     inventory = store.get_inventory();
     // for (auto i = inventory.begin();i!= inventory.end();i++){
-    //     std::cout<<i->first<<std::endl;
-    //     std::cout<<i->second->get_shelfLifeInDay()<<std::endl;
+    //     cout<<i->first<<endl;
+    //     cout<<i->second->get_shelfLifeInDay()<<endl;
     // }
     if (stoi(haveAccount) == 1)
     {
@@ -158,7 +159,8 @@ int main()
              << endl;
 
         double *costList = new double[10];
-        for (int j = 0;j<10;j++){
+        for (int j = 0; j < 10; j++)
+        {
             costList[j] = suppliant.get_costList()[j];
         }
         cout << "-----> Buying goods for day " << currentDay << " <-----" << endl;
@@ -215,13 +217,15 @@ int main()
                 if (itr != inventory.end()) // Check if itemName is found
                 {
                     itr->second->change_numItem(amount);
-                    if (itr->second->get_isPerishableItem()){
+                    if (itr->second->get_isPerishableItem())
+                    {
                         int expLength = itr->second->get_shelfLifeInDay();
-                        int * tmp = new int[expLength];
-                        for (int j = 0;j<expLength;j++){
+                        int *tmp = new int[expLength];
+                        for (int j = 0; j < expLength; j++)
+                        {
                             tmp[j] = itr->second->get_expirationList()[j];
                         }
-                        tmp[expLength-1] += amount;
+                        tmp[expLength - 1] += amount;
                         itr->second->set_expirationList(tmp);
                         delete[] tmp;
                     }
@@ -337,7 +341,7 @@ int main()
             store.updateStore();
             store.set_balance(balance);
             store.set_rating(rating);
-            delete []costList;
+            delete[] costList;
             currentDay += 1;
             target += currentDay + 5 * (currentDay / 5);
 
