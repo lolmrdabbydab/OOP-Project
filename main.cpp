@@ -65,8 +65,11 @@ int main()
         if (choice == "y")
         {
             cout << "\n--------------------------------- Introduction -----------------------------------" << endl;
-            cout << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
-                 << "Your goal is to maintain profitability and avoid bankruptcy!\n";
+            cout << "You are a small retail store manager.\n"
+                 << "Your task is to purchase goods every day for automated bots to buy from your store.\n"
+                 << "There's a daily target amount of balance that you must meet at the end of every day.\n"
+                 << "Every time your store doesn't have an item that a customer wants, your rating will go down.\n"
+                 << "Your goal is to meet this your balance target and not hit a rating of 0 or else you'll do bankrupt!\n";
         }
         cout << "----------------------------------------------------------------------------------\n"
              << endl;
