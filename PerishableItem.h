@@ -22,13 +22,13 @@ public:
     int *get_expirationList();
 
     // Setters
-    void set_shelfLifeInDay(int n);
-    void set_expirationList(int *nList);
+    void set_shelfLifeInDay(int shelfLifeInDay);
+    void set_expirationList(int *expirationList);
 
     // Methods
     virtual void print();
-    void sellItem(int n); // Remove item count from expirationList
-    void updateItem();    // Update item count in expirationList and update numItem variable
+    void sellItem(int amount); // Remove item count from expirationList
+    void updateItem();         // Update item count in expirationList and update numItem variable
 
     // Destructor
     ~PerishableItem();

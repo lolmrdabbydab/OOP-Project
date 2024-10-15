@@ -16,38 +16,41 @@ int PerishableItem::get_shelfLifeInDay() { return shelfLifeInDay; }
 int *PerishableItem::get_expirationList() { return expirationList; }
 
 // Setters
-void PerishableItem::set_shelfLifeInDay(int n) { shelfLifeInDay = n; }
-void PerishableItem::set_expirationList(int *expirationListTemp)
+void PerishableItem::set_shelfLifeInDay(int shelfLifeInDay) { this->shelfLifeInDay = shelfLifeInDay; }
+void PerishableItem::set_expirationList(int *expirationList)
 {
     for (int i = 0; i < this->shelfLifeInDay; i++)
     {
-        expirationList[i] = expirationListTemp[i];
+        this->expirationList[i] = expirationList[i];
     }
     return;
 }
 
 // Methods
 void PerishableItem::print() {}
-void PerishableItem::sellItem(int n)
+void PerishableItem::sellItem(int amount)
 {
-
-    for (int i = 0; i < shelfLifeInDay; i++) // Loop through available stock
+    for (int i = 0; i < shelfLifeInDay; i++) // Loop through all available stock across all expiry status
     {
-        if (n == 0)
+        if (amount == 0) // Input handling -> selling 0 item
         {
             return;
         }
-        if (n > expirationList[i]) // If amount to sell exceed stock with "i" days left till expire, sell all stock with that expiry date
+        if (amount > expirationList[i]) // If amount to sell exceed stock with "i" days left till expire, sell all stock with that expiry date
         {
-            n -= expirationList[i]; // Reduce item to sell with available stock for that expiry date
-            expirationList[i] = 0;
+            amount -= expirationList[i]; // Reduce item to sell with available stock for that expiry date
+            expirationList[i] = 0;       // Set stock with that expiry date to 0
         }
         else
         {
-            expirationList[i] -= n;
-            n = 0;
+            expirationList[i] -= amount;
+            amount = 0;
+
+            break;
         }
     }
+
+    return;
 }
 
 void PerishableItem::updateItem()

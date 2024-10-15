@@ -23,12 +23,23 @@
 #include "Soap.h"
 #include "Toy.h"
 
+using namespace std;
+
 class UnitTest
 {
-private:
-    
 public:
+    // Constructors
     UnitTest();
+
+    // Methods
+    void test_storeSetUp();           // Check if store's attributes are constructed correctly -> Important for game to run correctly
+    void test_suppliantSetUp();       // Check if suppliant's attributes are constructed correctly -> Important for game to run correctly
+    void test_updatePerishableItem(); // Check if the expirationList of PerishableItem are updated correctly
+    void test_sellPerishableItem();   // Check if PerishableItem count are deducted and expirationList are changed correctly from purchase
+    void test_updateCost();           // Check if the items' cost in costList is randomized correctly (within expected range limited by costRefList)
+    void test_updateStore();          // Check if Store's attributes are updated correctly after a day passed to be ready for updated data usage the next day
+
+    // Destructor
     ~UnitTest();
 };
 

@@ -12,9 +12,7 @@ TARGET = a
 
 # Source files
 SRCS = main.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp
-
-# File Mame
-FILENAME = someClass
+TEST_SRCS = UnitTest.cpp StoreBase.cpp Store.cpp Suppliant.cpp Item.cpp PerishableItem.cpp Milk.cpp Meat.cpp Egg.cpp Soap.cpp Toy.cpp
 
 # Executables
 help:
@@ -57,8 +55,8 @@ push:
 	git push
 
 # Automated Run Test
-test: UnitTest.cpp
-	@$(CXX) $(CXXFLAGS) UnitTest.cpp -o $(TARGET)
+test:
+	@$(CXX) $(CXXFLAGS) $(TEST_SRCS) -o $(TARGET)
 	@./$(TARGET)
 	@make clean
 
