@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iomanip>
 
 #include "Printable.h"
 #include "StoreBase.h"

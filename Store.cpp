@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iomanip>
 
 #include "Printable.h"
 #include "StoreBase.h"
@@ -46,14 +47,28 @@ void Store::updateStore()
 // Methods
 void Store::print()
 {
-    cout << "************************************" << endl;
-    cout << "\t Store's Inventory" << endl;
-    cout << "************************************\n" << endl;
-    for (int i = 0; i < StoreBase::get_numDifferentItem(); i++)
+    cout << "**********************************************************************************" << endl;
+    cout << setw(50) << right << "Store's Inventory" << endl;
+    cout << "**********************************************************************************" << endl;
+    cout << setw(3) << right << " No. " 
+         << setw(22) << right << "Product Name" << setw(14) << right << "|" 
+         << setw(14) << right << "Inventory  |" 
+         << setw(20) << right << "Retail Price" << endl;
+    cout << "**********************************************************************************" << endl;
+
+    for (size_t i = 0; i < this->get_numDifferentItem(); i++)
     {
-        cout << i + 1 << ". " << itemNames[i] << ": x" << get_inventory()[itemNames[i]]->get_numItem() << endl;
+        // Product details with columns for Product Name, Inventory, and Retail Price separated by "|"
+        cout << setw(3) << right << i + 1 << ". ";
+        cout << setw(35) << left << itemNames[i] << "| ";
+        cout << "x" << setw(10) << left << this->get_inventory()[itemNames[i]]->get_numItem() << " | ";
+        cout << "$" << setw(10) << left << this->get_inventory()[itemNames[i]]->get_price() << endl;
     }
-    cout << "\n************************************\n" << endl;
+
+    cout << "**********************************************************************************" << endl;
+    cout << "  Current Balance: $" << balance << endl;
+    cout << "  Balance Target: $" << target << endl;
+    cout << "----------------------------\n" << endl;
 }
 
 // Destructor

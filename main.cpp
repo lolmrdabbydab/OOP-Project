@@ -29,33 +29,28 @@ int main()
     {
         system("clear");
 
-        /* -------------------------
-            -= Set-up Suppliant =-
-        ------------------------- */
+        /* -------------------------------
+           -= Set-up Store & Suppliant =-
+        ------------------------------- */
+
+        Store store = Store();
         Suppliant suppliant = Suppliant();
         string *itemsName = new string[10];
+
         for (int j = 0; j < 10; j++)
         {
             itemsName[j] = suppliant.get_itemNames()[j];
         }
 
-        /* -------------------------
-            -= Set-up Store =-
-        ------------------------- */
-        Store store = Store();
-        // map<string, Item *> inventory;
-        // inventory = store.get_inventory();
-        // for (auto i = inventory.begin();i!= inventory.end();i++){
-        //     cout<<i->first<<endl;
-        //     cout<<i->second->get_shelfLifeInDay()<<endl;
-        // }
-
         /* -------------------------------
-            -= Introduction Prompt =-
+                -= Introduction =-
         ------------------------------- */
+
         string choice;
 
-        cout << "\t\t\t\t------------=============== Welcome to The Retail Simulator Game ===============------------" << endl;
+        cout << "\t\t|====================================================================================================|" << endl;
+        cout << "\t\t|====----------------------      Welcome to The Retail Simulator Game      ----------------------====|" << endl;
+        cout << "\t\t|====================================================================================================|" << endl;
         cout << "\nWould you like to see the game introduction? (y/n): ";
 
         // Error handling for user input
@@ -72,11 +67,13 @@ int main()
             cout << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
                  << "Your goal is to maintain profitability and avoid bankruptcy!\n";
         }
-        cout << "----------------------------------------------------------------------------------\n" << endl;
+        cout << "----------------------------------------------------------------------------------\n"
+             << endl;
 
         /* -------------------------
           -= Choosing Progression =-
         ------------------------- */
+
         if (!restart) // If user has previously chosen to start new game
         {
             int gameProgessChoice;
@@ -105,6 +102,7 @@ int main()
                 /* -------------------------
                 -= Read & Use Data.txt File =-
                 ------------------------- */
+
                 string haveAccount;
                 ifstream ReadFile("data.txt"); // Assign found "data.txt" to variable: ReadFile
                 getline(ReadFile, haveAccount);
@@ -116,6 +114,7 @@ int main()
                     /* -------------------------
                     -= Set-up Store Status =-
                     ------------------------- */
+
                     string currentDay;
                     getline(ReadFile, currentDay);
                     store.set_currentDay(stoi(currentDay));
@@ -139,6 +138,7 @@ int main()
                     /* -------------------------
                     -= Set-up Store's Inventory =-
                     ------------------------- */
+
                     for (int i = 0; i < 10; i++)
                     {
                         string line;
@@ -161,6 +161,7 @@ int main()
                             /* ----------------------------------------------------
                             -= Set-up Perishable Item's numItem & expirationList =-
                             ---------------------------------------------------- */
+
                             store.get_inventory()[itemsName[stoi(information.at(0))]]->set_numItem(stoi(information.at(1)));
 
                             int shelfLifeInDay = store.get_inventory()[itemsName[stoi(information.at(0))]]->get_shelfLifeInDay();
@@ -185,6 +186,7 @@ int main()
         /* -----------------------------
         -= Set-Up Store Data Variable =-
         ----------------------------- */
+
         store.set_balance(100000);
         double balance = store.get_balance();
         double rating = store.get_rating();
@@ -195,11 +197,13 @@ int main()
         /* -------------------------
         -= User Store Purchasing =-
         ------------------------- */
+
         bool running = true;
         while (running)
         {
             srand(time(nullptr)); // Randomize Time
 
+            int countPurchase = 0;
             double *costList = new double[10];
 
             for (int j = 0; j < 10; j++)
@@ -210,7 +214,8 @@ int main()
             /* -------------------------
             -= Purchase Input Handling =-
             ------------------------- */
-            while (true)
+            bool buying = true;
+            while (buying)
             {
                 system("clear");
 
@@ -223,103 +228,113 @@ int main()
                 -= Show Inventory & Suppliant Shop =-
                 ----------------------------------- */
 
-                cout << "--------------------------->>>>>>>> Buying Goods for Day " << currentDay << " <<<<<<<<--------------------------------" << endl;
-                cout << "***************************************************************************************************" << endl;
-                cout << setw(35) << right << "Store's Inventory" << setw(15) << "|" << setw(35) << "Costs of Today's Goods" << endl;
-                cout << "***************************************************************************************************" << endl;
-
-                for (size_t i = 0; i < suppliant.get_numDifferentItem(); i++)
-                {
-                    // Inventory table section
-                    cout << setw(3) << right << i + 1 << ". ";
-                    cout << setw(30) << left << itemsName[i] << ": x" << setw(7) << left << store.get_inventory()[itemsName[i]]->get_numItem() << setw(5) << right << "|";
-
-                    // Padding for spacing
-                    cout << setw(5) << " ";
-
-                    // Cost table section
-                    cout << setw(2) << right << (i + 1) << ". ";
-                    cout << setw(30) << left << itemsName[i] << ": $" << suppliant.get_costList()[i] << endl;
-                }
-                cout << "***************************************************************************************************" << endl;
-                cout << "  Current Balance: $" << balance << endl;
-                cout << "  Balance Target: $" << target << endl;
-                cout << "*********************************" << endl;
+                cout << "------------------->>>>>>>> Buying Goods for Day " << currentDay << " <<<<<<<<-----------------------" << endl;
+                store.print();
+                suppliant.print();
 
                 /* -------------------------
                     -= Choosing Item =-
                 ------------------------- */
 
                 int itemNum;
-                int itemIndex;
-                cout << "\n\nPlease choose items to buy (1-10) (Enter any other numbers to stop purchase): ";
 
-                while (!(cin >> itemNum)) // Loop until an int input
+                while (true)
                 {
-                    cout << "Invalid input type. Please enter an integer from (1-10): ";
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                }
+                    cout << "\n\nPlease choose items to buy (1-10) (Enter any other number to stop purchase): ";
 
-                if (itemNum < 1 || itemNum > 10) // Stop input request if input number not in range
-                {
-                    break;
-                }
-                itemIndex = itemNum - 1;
-
-                /* -------------------------
-                -= Choosing Item Amount =-
-                ------------------------- */
-                int amount;
-                cout << "Amount: ";
-
-                while (!(cin >> amount)) // Loop until an int input
-                {
-                    cout << "Invalid input type. Please enter an integer: ";
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                }
-
-                if (amount * costList[itemIndex] > balance) // Insufficient fund for purchase
-                {
-                    cout << "Not enough money!!!" << endl;
-                }
-                else // Add purchase to Store's inventory
-                {
-                    string itemName = itemsName[itemIndex];
-                    map<string, Item *> inventory = store.get_inventory();
-                    auto itr = inventory.find(itemName);
-                    Item *item = itr->second;
-
-                    if (itr != inventory.end()) // Check if itemName is found
+                    while (!(cin >> itemNum)) // Ask until int input
                     {
-                        item->change_numItem(amount); // Change Item's numItem count
-                        
-                        if (item->get_isPerishableItem()) // Adjust expirationList for new PerishableItem
+                        cout << "Invalid input type. Please enter an integer from (1-10): ";
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }
+
+                    if (itemNum < 1 || itemNum > 10) // Check if user didn't have any purchases
+                    {
+                        if (countPurchase == 0)
                         {
-                            int expLength = item->get_shelfLifeInDay();
-                            int *tmp = new int[expLength];
-                            
-                            for (int j = 0; j < expLength; j++)
+                            string confirm;
+                            cout << "\nAre you sure you want to proceed without buying any items? (y/n): ";
+
+                            while (!(cin >> confirm) || (confirm != "y" && confirm != "n"))
                             {
-                                tmp[j] = item->get_expirationList()[j];
+                                cout << "Invalid input. Please enter 'y' or 'n': ";
                             }
-                            
-                            tmp[expLength - 1] += amount;
-                            item->set_expirationList(tmp);
-                            delete[] tmp;
+
+                            if (confirm == "y")
+                            {
+                                buying = false;
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
                         }
-                        
-                        balance -= costList[itemIndex] * amount; // Decrease balance from purchase
-                        cout << "\n* Remaining Balance: $" << balance << " *" << endl;
+                        else
+                        {
+                            buying = false;
+                            break;
+                        }
+                    }
+
+                    /* -------------------------
+                    -= Choosing Item Amount =-
+                    ------------------------- */
+
+                    int itemIndex = itemNum - 1;
+                    int amount;
+                    cout << "Amount: ";
+
+                    while (true) // Ask until a valid non-negative integer is entered
+                    {
+                        if (cin >> amount && amount >= 0)
+                        {
+                            break;
+                        }
+
+                        cout << "Invalid Amount. Please enter a non-negative integer: ";
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }
+
+                    if (amount * costList[itemIndex] > balance) // Insufficient fund for purchase
+                    {
+                        cout << "Not enough money!!!" << endl;
+                    }
+                    else // Add purchase to Store's inventory
+                    {
+                        countPurchase++;
+                        string itemName = itemsName[itemIndex];
+                        map<string, Item *> inventory = store.get_inventory();
+                        auto itr = inventory.find(itemName);
+                        Item *item = itr->second;
+
+                        if (itr != inventory.end()) // Check if itemName is found
+                        {
+                            item->change_numItem(amount); // Change Item's numItem count
+
+                            if (item->get_isPerishableItem()) // Adjust expirationList for new PerishableItem
+                            {
+                                int expLength = item->get_shelfLifeInDay();
+                                int *tmp = new int[expLength];
+
+                                for (int j = 0; j < expLength; j++)
+                                {
+                                    tmp[j] = item->get_expirationList()[j];
+                                }
+
+                                tmp[expLength - 1] += amount;
+                                item->set_expirationList(tmp);
+                                delete[] tmp;
+                            }
+
+                            balance -= costList[itemIndex] * amount; // Decrease balance from purchase
+                            cout << "\n* Remaining Balance: $" << balance << " *" << endl;
+                        }
                     }
                 }
             }
-
-            /* ---------------------------------
-            -= Show Inventory Post-Purchase =-
-            --------------------------------- */
-            store.print();
 
             /* -------------------------
                     -= Run Day =-
@@ -334,6 +349,7 @@ int main()
             /* ----------------------------
                 -= Randomise Purchase =-
             ---------------------------- */
+
             for (int i = 0; i < numCustomer; i++)
             {
                 int good = rand() % 10;                   // Randomise Good (Index)
@@ -342,6 +358,7 @@ int main()
                 /* ------------------------------------------
                 -= Update Inventory & Rating after Purchase =-
                 ------------------------------------------ */
+
                 map<string, Item *> inventory = store.get_inventory();
                 auto itr = inventory.find(itemsName[good]);
 
@@ -377,6 +394,7 @@ int main()
                 /* -------------------------
                      -= Day Summary =-
                 ------------------------- */
+
                 cout << "\n=======-------- Store Status (End of Day " << store.get_currentDay() << ") --------=======\n"
                      << endl;
                 cout << "* Balance: $" << balance << endl;
@@ -439,6 +457,7 @@ int main()
                 /* ----------------------------
                 -= Update Suppliant & Store =-
                 ---------------------------- */
+
                 suppliant.updateCost();
                 store.updateStore();
                 store.set_balance(balance);
@@ -466,6 +485,7 @@ int main()
                     /* -----------------------------------
                     -= Save Store Inventory to Data.txt =-
                     ----------------------------------- */
+
                     for (auto i = inventory.begin(); i != inventory.end(); i++)
                     {
                         if (i->second->get_isPerishableItem()) // Save perishable Item data

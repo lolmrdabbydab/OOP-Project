@@ -4,6 +4,7 @@
 #include <map>
 #include <stdlib.h>
 #include <ctime>
+#include <iomanip>
 
 #include "Printable.h"
 #include "StoreBase.h"
@@ -42,15 +43,17 @@ void Suppliant::set_costList(double[10]) {}
 // Methods
 void Suppliant::print()
 {
-    cout << "************************************" << endl;
-    cout << "\tCosts of Today's Goods" << endl;
-    cout << "************************************\n"
-         << endl;
-    for (int i = 0; i < 10; i++)
+    cout << setw(54) << right << "Costs of Today's Goods" << endl;
+    cout << "**********************************************************************************" << endl;
+
+    for (size_t i = 0; i < this->get_numDifferentItem(); i++)
     {
-        cout << i + 1 << ". " << itemNames[i] << ": $" << costList[i] << endl;
+        // Cost table section
+        cout << setw(20) << right << i + 1 << ". ";
+        cout << setw(30) << left << itemNames[i] << "  |   $" << this->get_costList()[i] << endl;
     }
-    cout << "\n************************************" << endl;
+
+    cout << "**********************************************************************************" << endl;
 }
 
 void Suppliant::updateCost()
