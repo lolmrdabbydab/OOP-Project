@@ -266,8 +266,6 @@ int main()
                     break;
                 }
                 itemIndex = itemNum - 1;
-                cout << "itemNum: " << itemNum << endl; // ============================================================================
-                cout << "itemIndex: " << itemIndex << endl; // ============================================================================
 
                 /* -------------------------
                 -= Choosing Item Amount =-
@@ -293,16 +291,10 @@ int main()
                     auto itr = inventory.find(itemName);
                     Item *item = itr->second;
 
-                    cout << "itemName: " << itemName << endl; // ============================================================================
-                    cout << "numItem (Before): " << item->get_numItem() << endl; // ============================================================================
-
                     if (itr != inventory.end()) // Check if itemName is found
                     {
                         item->change_numItem(amount); // Change Item's numItem count
-                        cout << "numItem (After): " << item->get_numItem() << endl; // ============================================================================
                         
-                        sleep(3);
-
                         if (item->get_isPerishableItem()) // Adjust expirationList for new PerishableItem
                         {
                             int expLength = item->get_shelfLifeInDay();
