@@ -197,6 +197,14 @@ int main()
         while (running)
         {
             srand(time(nullptr)); // Randomize Time
+
+            double *costList = new double[10];
+
+            for (int j = 0; j < 10; j++)
+            {
+                costList[j] = suppliant.get_costList()[j]; // Update costList with randomized cost based on costRefList
+            }
+
             cout << "\n-------------------------------" << endl;
             cout << "\tWelcome to day " << currentDay << endl;
             cout << "-------------------------------\n"
@@ -205,23 +213,12 @@ int main()
             cout << "* Balance Target: $" << target << endl;
             cout << "-------------------------------\n" << endl;
 
-            /* ---------------------------------
-            -= Show Inventory Post-Purchase =-
-            --------------------------------- */
+            /* -----------------------------------
+            -= Show Inventory & Suppliant Shop =-
+            ----------------------------------- */
 
             cout << "\n" << endl;
-            store.print();
 
-            /* -----------------------
-            -= Show Suppliant Shop =-
-            ----------------------- */
-
-            double *costList = new double[10];
-
-            for (int j = 0; j < 10; j++)
-            {
-                costList[j] = suppliant.get_costList()[j];
-            }
             
             cout << "\n\n-----> Buying goods for day " << currentDay << " <-----" << endl;
             suppliant.print();

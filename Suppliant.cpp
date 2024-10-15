@@ -37,7 +37,6 @@ double *Suppliant::get_costList() { return costList; }
 
 // Setters
 void Suppliant::set_costRefList(double[10]) {}
-
 void Suppliant::set_costList(double[10]) {}
 
 // Methods
