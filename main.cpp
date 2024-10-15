@@ -92,7 +92,7 @@ int main()
             }
 
             int gameProgressChoice = stoi(input);
-            
+
             if (gameProgressChoice == 1)
             {
                 ofstream MyFile("data.txt"); // Ensure data.txt is available
@@ -440,28 +440,15 @@ int main()
                 cout << "\t3. Start new game" << endl;
                 cout << "\nHow would you like to proceed (Enter 1, 2 or 3): ";
 
-                int choice;
-                while (true) // Progression option
+                string input;
+                while (cin >> input && (input != "1" && input != "2" && input != "3")) // Progression Option
                 {
-                    if (cin >> choice && ((choice == 1 || choice == 2) || (choice == 3)))
-                    {
-                        if (choice == 3)
-                        {
-                            ofstream MyFile("data.txt");
-                            MyFile << 0 << endl; // Clear data.txt
-                            MyFile.close();
-
-                            running = false;
-                            restart = true;
-                        }
-
-                        break;
-                    }
-
-                    cout << "Invalid input type. Please enter an integer (1, 2 or 3): ";
+                    cout << "Invalid input. Please enter (1, 2, or 3): ";
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
+
+                int choice = stoi(input);
 
                 /* ----------------------------
                 -= Update Suppliant & Store =-
@@ -479,7 +466,16 @@ int main()
                 -= Save Progress to Data.txt =-
                 ---------------------------- */
 
-                if (choice == 2)
+                if (choice == 3)
+                {
+                    ofstream MyFile("data.txt");
+                    MyFile << 0 << endl; // Clear data.txt
+                    MyFile.close();
+
+                    running = false;
+                    restart = true;
+                }
+                else if (choice == 2)
                 {
                     ofstream MyFile("data.txt");
                     MyFile << 1 << endl;
