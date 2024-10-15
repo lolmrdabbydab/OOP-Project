@@ -19,7 +19,7 @@ private:
 
 public:
     // Constructors
-    Egg(int numItem, double price, string brand, int shelfLifeInDay, bool fromAnimal, bool isPerishable, string eggType);
+    Egg(int numItem, double price, string brand, int shelfLifeInDay, bool fromAnimal, bool isPerishableItem, string eggType);
 
     // Getters
     bool get_fromAnimal() const;

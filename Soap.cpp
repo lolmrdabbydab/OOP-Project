@@ -20,8 +20,7 @@ void Soap::set_soapType(string soapType) { this->soapType = soapType; }
 
 // Methods
 void Soap::print() {}
-
-void Soap::change_numItem(int n) {}
+void Soap::change_numItem(int numItem) { this->numItem += numItem; }
 
 // Destructor
 Soap::~Soap() {}

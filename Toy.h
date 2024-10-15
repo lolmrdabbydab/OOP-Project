@@ -16,7 +16,7 @@ private:
 
 public:
     // Constructors
-    Toy(int numItem, double price, string brand, bool isPerishable, string toyType, int minAgeRestriction);
+    Toy(int numItem, double price, string brand, bool isPerishableItem, string toyType, int minAgeRestriction);
 
     // Getters
     string get_toyType() const;
@@ -28,7 +28,7 @@ public:
 
     // Methods
     void print() override;
-    void changeItem(int n);
+    void change_numItem(int n) override;
 
     // Destructor
     ~Toy();

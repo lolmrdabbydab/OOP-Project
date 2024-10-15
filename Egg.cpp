@@ -10,8 +10,8 @@
 using namespace std;
 
 // Constructors
-Egg::Egg(int numItem, double price, string brand, int shelfLifeInDay, bool fromAnimal, bool isPerishable, string eggType)
-    : PerishableItem(numItem, price, brand, isPerishable, shelfLifeInDay), fromAnimal(fromAnimal), eggType(eggType) {}
+Egg::Egg(int numItem, double price, string brand, int shelfLifeInDay, bool fromAnimal, bool isPerishableItem, string eggType)
+    : PerishableItem(numItem, price, brand, isPerishableItem, shelfLifeInDay), fromAnimal(fromAnimal), eggType(eggType) {}
 
 // Getters
 bool Egg::get_fromAnimal() const { return fromAnimal; }

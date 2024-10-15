@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constructors
-Toy::Toy(int numItem, double price, string brand, bool isPerishable, string toyType, int minAgeRestriction) : Item(numItem, price, brand, isPerishable), toyType(toyType), minAgeRestriction(minAgeRestriction)
+Toy::Toy(int numItem, double price, string brand, bool isPerishableItem, string toyType, int minAgeRestriction) : Item(numItem, price, brand, isPerishableItem), toyType(toyType), minAgeRestriction(minAgeRestriction)
 {
 }
 
@@ -22,7 +22,7 @@ void Toy::set_minAgeRestriction(int minAgeRestriction) { this->minAgeRestriction
 
 // Methods
 void Toy::print() {}
-void Toy::changeItem(int n) {}
+void Toy::change_numItem(int numItem) { this->numItem += numItem; }
 
 // Destructor
 Toy::~Toy() {}

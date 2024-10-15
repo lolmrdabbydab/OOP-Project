@@ -72,8 +72,7 @@ int main()
             cout << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
                  << "Your goal is to maintain profitability and avoid bankruptcy!\n";
         }
-        cout << "----------------------------------------------------------------------------------\n"
-             << endl;
+        cout << "----------------------------------------------------------------------------------\n" << endl;
 
         /* -------------------------
           -= Choosing Progression =-
@@ -226,7 +225,7 @@ int main()
 
                 cout << "--------------------------->>>>>>>> Buying Goods for Day " << currentDay << " <<<<<<<<--------------------------------" << endl;
                 cout << "***************************************************************************************************" << endl;
-                cout << setw(35) << "Store's Inventory" << setw(15) << "|" << setw(35) << "Costs of Today's Goods" << endl;
+                cout << setw(35) << right << "Store's Inventory" << setw(15) << "|" << setw(35) << "Costs of Today's Goods" << endl;
                 cout << "***************************************************************************************************" << endl;
 
                 for (size_t i = 0; i < suppliant.get_numDifferentItem(); i++)
@@ -245,8 +244,7 @@ int main()
                 cout << "***************************************************************************************************" << endl;
                 cout << "  Current Balance: $" << balance << endl;
                 cout << "  Balance Target: $" << target << endl;
-                cout << "*********************************\n"
-                     << endl;
+                cout << "*********************************" << endl;
 
                 /* -------------------------
                     -= Choosing Item =-
@@ -254,7 +252,7 @@ int main()
 
                 int itemNum;
                 int itemIndex;
-                cout << "\nPlease choose items to buy (1-10) (Enter any other numbers to stop purchase): ";
+                cout << "\n\nPlease choose items to buy (1-10) (Enter any other numbers to stop purchase): ";
 
                 while (!(cin >> itemNum)) // Loop until an int input
                 {
@@ -268,6 +266,8 @@ int main()
                     break;
                 }
                 itemIndex = itemNum - 1;
+                cout << "itemNum: " << itemNum << endl; // ============================================================================
+                cout << "itemIndex: " << itemIndex << endl; // ============================================================================
 
                 /* -------------------------
                 -= Choosing Item Amount =-
@@ -293,22 +293,32 @@ int main()
                     auto itr = inventory.find(itemName);
                     Item *item = itr->second;
 
+                    cout << "itemName: " << itemName << endl; // ============================================================================
+                    cout << "numItem (Before): " << item->get_numItem() << endl; // ============================================================================
+
                     if (itr != inventory.end()) // Check if itemName is found
                     {
-                        item->change_numItem(amount);
-                        if (item->get_isPerishableItem())
+                        item->change_numItem(amount); // Change Item's numItem count
+                        cout << "numItem (After): " << item->get_numItem() << endl; // ============================================================================
+                        
+                        sleep(3);
+
+                        if (item->get_isPerishableItem()) // Adjust expirationList for new PerishableItem
                         {
                             int expLength = item->get_shelfLifeInDay();
                             int *tmp = new int[expLength];
+                            
                             for (int j = 0; j < expLength; j++)
                             {
                                 tmp[j] = item->get_expirationList()[j];
                             }
+                            
                             tmp[expLength - 1] += amount;
                             item->set_expirationList(tmp);
                             delete[] tmp;
                         }
-                        balance -= costList[itemIndex] * amount;
+                        
+                        balance -= costList[itemIndex] * amount; // Decrease balance from purchase
                         cout << "\n* Remaining Balance: $" << balance << " *" << endl;
                     }
                 }
