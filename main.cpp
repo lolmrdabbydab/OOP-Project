@@ -6,6 +6,7 @@
 #include <ctime>
 #include <vector>
 #include <map>
+#include <iomanip>
 
 #include "Printable.h"
 #include "StoreBase.h"
@@ -42,8 +43,8 @@ int main()
             -= Set-up Store =-
         ------------------------- */
         Store store = Store();
-        map<string, Item *> inventory;
-        inventory = store.get_inventory();
+        // map<string, Item *> inventory;
+        // inventory = store.get_inventory();
         // for (auto i = inventory.begin();i!= inventory.end();i++){
         //     cout<<i->first<<endl;
         //     cout<<i->second->get_shelfLifeInDay()<<endl;
@@ -71,7 +72,8 @@ int main()
             cout << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
                  << "Your goal is to maintain profitability and avoid bankruptcy!\n";
         }
-        cout << "----------------------------------------------------------------------------------\n" << endl;
+        cout << "----------------------------------------------------------------------------------\n"
+             << endl;
 
         /* -------------------------
           -= Choosing Progression =-
@@ -184,6 +186,7 @@ int main()
         /* -----------------------------
         -= Set-Up Store Data Variable =-
         ----------------------------- */
+        store.set_balance(100000);
         double balance = store.get_balance();
         double rating = store.get_rating();
         double target = store.get_target();
@@ -205,30 +208,50 @@ int main()
                 costList[j] = suppliant.get_costList()[j]; // Update costList with randomized cost based on costRefList
             }
 
-            cout << "\n-------------------------------" << endl;
-            cout << "\tWelcome to day " << currentDay << endl;
-            cout << "-------------------------------\n"
-                 << endl;
-            cout << "* Current Balance: $" << balance << endl;
-            cout << "* Balance Target: $" << target << endl;
-            cout << "-------------------------------\n" << endl;
-
-            /* -----------------------------------
-            -= Show Inventory & Suppliant Shop =-
-            ----------------------------------- */
-            
-            cout << "\n\n-----> Buying goods for day " << currentDay << " <-----" << endl;
-            
-            suppliant.print();
-
             /* -------------------------
             -= Purchase Input Handling =-
             ------------------------- */
             while (true)
             {
+                system("clear");
+
+                cout << "\n\t\t\t\t-------------------------------" << endl;
+                cout << "\t\t\t\t\tWelcome to day " << currentDay << endl;
+                cout << "\t\t\t\t-------------------------------\n"
+                     << endl;
+
+                /* -----------------------------------
+                -= Show Inventory & Suppliant Shop =-
+                ----------------------------------- */
+
+                cout << "--------------------------->>>>>>>> Buying Goods for Day " << currentDay << " <<<<<<<<--------------------------------" << endl;
+                cout << "***************************************************************************************************" << endl;
+                cout << setw(35) << "Store's Inventory" << setw(15) << "|" << setw(35) << "Costs of Today's Goods" << endl;
+                cout << "***************************************************************************************************" << endl;
+
+                for (size_t i = 0; i < suppliant.get_numDifferentItem(); i++)
+                {
+                    // Inventory table section
+                    cout << setw(3) << right << i + 1 << ". ";
+                    cout << setw(30) << left << itemsName[i] << ": x" << setw(7) << left << store.get_inventory()[itemsName[i]]->get_numItem() << setw(5) << right << "|";
+
+                    // Padding for spacing
+                    cout << setw(5) << " ";
+
+                    // Cost table section
+                    cout << setw(2) << right << (i + 1) << ". ";
+                    cout << setw(30) << left << itemsName[i] << ": $" << suppliant.get_costList()[i] << endl;
+                }
+                cout << "***************************************************************************************************" << endl;
+                cout << "  Current Balance: $" << balance << endl;
+                cout << "  Balance Target: $" << target << endl;
+                cout << "*********************************\n"
+                     << endl;
+
                 /* -------------------------
                     -= Choosing Item =-
                 ------------------------- */
+
                 int itemNum;
                 int itemIndex;
                 cout << "\nPlease choose items to buy (1-10) (Enter any other numbers to stop purchase): ";
@@ -267,21 +290,22 @@ int main()
                 {
                     string itemName = itemsName[itemIndex];
                     map<string, Item *> inventory = store.get_inventory();
-
                     auto itr = inventory.find(itemName);
+                    Item *item = itr->second;
+
                     if (itr != inventory.end()) // Check if itemName is found
                     {
-                        itr->second->change_numItem(amount);
-                        if (itr->second->get_isPerishableItem())
+                        item->change_numItem(amount);
+                        if (item->get_isPerishableItem())
                         {
-                            int expLength = itr->second->get_shelfLifeInDay();
+                            int expLength = item->get_shelfLifeInDay();
                             int *tmp = new int[expLength];
                             for (int j = 0; j < expLength; j++)
                             {
-                                tmp[j] = itr->second->get_expirationList()[j];
+                                tmp[j] = item->get_expirationList()[j];
                             }
                             tmp[expLength - 1] += amount;
-                            itr->second->set_expirationList(tmp);
+                            item->set_expirationList(tmp);
                             delete[] tmp;
                         }
                         balance -= costList[itemIndex] * amount;
@@ -293,7 +317,6 @@ int main()
             /* ---------------------------------
             -= Show Inventory Post-Purchase =-
             --------------------------------- */
-            cout << "\n" << endl;
             store.print();
 
             /* -------------------------
