@@ -18,6 +18,9 @@ help:
 	@echo 'To push all changes with commit message "Update" type: make push'
 	@echo 'To push all changes with personal commit message type: make push m="Your commit message"'
 
+data:
+	@echo 0 > data.txt
+
 run:
 	@$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET)
 	@./$(TARGET)

@@ -26,16 +26,7 @@ int main()
     bool restart = false;
     do
     {
-        /* code */
-
         system("clear");
-
-        /* -------------------------
-            -= Read Data.txt File =-
-        ------------------------- */
-        string haveAccount;
-        ifstream ReadFile("data.txt"); // Assign found "data.txt" to variable: ReadFile
-        getline(ReadFile, haveAccount);
 
         /* -------------------------
             -= Set-up Suppliant =-
@@ -57,90 +48,10 @@ int main()
         //     cout<<i->first<<endl;
         //     cout<<i->second->get_shelfLifeInDay()<<endl;
         // }
-        if (stoi(haveAccount) == 1)
-        {
-            suppliant.updateCost(); // Update costList (Saved -> Made past Day 1 -> Default costList must be change)
 
-            /* -------------------------
-            -= Set-up Store Status =-
-            ------------------------- */
-            string currentDay;
-            getline(ReadFile, currentDay);
-            store.set_currentDay(stoi(currentDay));
-
-            string balance;
-            getline(ReadFile, balance);
-            store.set_balance(stod(balance));
-
-            string rating;
-            getline(ReadFile, rating);
-            store.set_rating(stod(rating));
-
-            string target;
-            getline(ReadFile, target);
-            store.set_target(stod(target));
-
-            string numCustomer;
-            getline(ReadFile, numCustomer);
-            store.set_numCustomer(stoi(numCustomer));
-
-            /* -------------------------
-            -= Set-up Store's Inventory =-
-            ------------------------- */
-            for (int i = 0; i < 10; i++)
-            {
-                string line;
-                string word;
-                vector<string> information;
-
-                getline(ReadFile, line);
-                stringstream wordsInLine(line);
-
-                while (wordsInLine >> word)
-                {
-                    information.push_back(word);
-                }
-                if (store.get_inventory()[itemsName[stoi(information.at(0))]]->get_isPerishableItem() == false) // For Non-Perishable Item
-                {
-                    store.get_inventory()[itemsName[stoi(information.at(0))]]->set_numItem(stoi(information.at(1)));
-                }
-                else // For Perishable Item
-                {
-
-                    /* ----------------------------------------------------
-                    -= Set-up Perishable Item's numItem & expirationList =-
-                    ---------------------------------------------------- */
-                    store.get_inventory()[itemsName[stoi(information.at(0))]]->set_numItem(stoi(information.at(1)));
-
-                    int shelfLifeInDay = store.get_inventory()[itemsName[stoi(information.at(0))]]->get_shelfLifeInDay();
-                    int *expirationList = new int[shelfLifeInDay];
-                    int index = 0;
-
-                    for (int j = 2; j < information.size(); j++)
-                    {
-                        expirationList[index] = stoi(information[j]);
-                        index++;
-                    }
-                    store.get_inventory()[itemsName[stoi(information.at(0))]]->set_expirationList(expirationList);
-
-                    delete[] expirationList;
-                }
-            }
-        }
-        ReadFile.close();
-
-        /* -----------------------------
-        -= Set-Up Store Data Variable =-
-        ----------------------------- */
-        double balance = store.get_balance();
-        double rating = store.get_rating();
-        double target = store.get_target();
-        int currentDay = store.get_currentDay();
-        int numCustomer = store.get_numCustomer();
-
-        /* -------------------------------------------------
-        -= Finish Set-up | Run Game | Introduction Prompt =-
-        ------------------------------------------------- */
+        /* -------------------------------
+            -= Introduction Prompt =-
+        ------------------------------- */
         string choice;
 
         cout << "-= Welcome to The Retail Simulator Game =-" << endl;
@@ -160,6 +71,124 @@ int main()
                  << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
                  << "Your goal is to maintain profitability and avoid bankruptcy!\n";
         }
+
+        /* -------------------------
+          -= Choosing Progression =-
+        ------------------------- */
+        if (!restart) // If user has previously chosen to start new game
+        {
+            int gameProgessChoice;
+
+            cout << "Would you like to:\n";
+            cout << "\t1. Start a new game\n";
+            cout << "\t2. Continue from where you left off\n";
+            cout << "Enter your choice (1 or 2): ";
+
+            // Error handling for user input
+            while (!(cin >> gameProgessChoice) || (gameProgessChoice != 1 && gameProgessChoice != 2))
+            {
+                cout << "Invalid input. Please enter '1' to start a new game or '2' to continue: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+
+            if (gameProgessChoice == 1)
+            {
+                ofstream MyFile("data.txt"); // Ensure data.txt is available
+                MyFile << 0 << endl; // Ensure data.txt has default starting data
+                MyFile.close();
+            }
+            else if (gameProgessChoice == 2)
+            {
+                /* -------------------------
+                -= Read & Use Data.txt File =-
+                ------------------------- */
+                string haveAccount;
+                ifstream ReadFile("data.txt"); // Assign found "data.txt" to variable: ReadFile
+                getline(ReadFile, haveAccount);
+
+                if (stoi(haveAccount) == 1)
+                {
+                    suppliant.updateCost(); // Update costList (Saved -> Made past Day 1 -> Default costList must be change)
+
+                    /* -------------------------
+                    -= Set-up Store Status =-
+                    ------------------------- */
+                    string currentDay;
+                    getline(ReadFile, currentDay);
+                    store.set_currentDay(stoi(currentDay));
+
+                    string balance;
+                    getline(ReadFile, balance);
+                    store.set_balance(stod(balance));
+
+                    string rating;
+                    getline(ReadFile, rating);
+                    store.set_rating(stod(rating));
+
+                    string target;
+                    getline(ReadFile, target);
+                    store.set_target(stod(target));
+
+                    string numCustomer;
+                    getline(ReadFile, numCustomer);
+                    store.set_numCustomer(stoi(numCustomer));
+
+                    /* -------------------------
+                    -= Set-up Store's Inventory =-
+                    ------------------------- */
+                    for (int i = 0; i < 10; i++)
+                    {
+                        string line;
+                        string word;
+                        vector<string> information;
+
+                        getline(ReadFile, line);
+                        stringstream wordsInLine(line);
+
+                        while (wordsInLine >> word)
+                        {
+                            information.push_back(word);
+                        }
+                        if (store.get_inventory()[itemsName[stoi(information.at(0))]]->get_isPerishableItem() == false) // For Non-Perishable Item
+                        {
+                            store.get_inventory()[itemsName[stoi(information.at(0))]]->set_numItem(stoi(information.at(1)));
+                        }
+                        else // For Perishable Item
+                        {
+
+                            /* ----------------------------------------------------
+                            -= Set-up Perishable Item's numItem & expirationList =-
+                            ---------------------------------------------------- */
+                            store.get_inventory()[itemsName[stoi(information.at(0))]]->set_numItem(stoi(information.at(1)));
+
+                            int shelfLifeInDay = store.get_inventory()[itemsName[stoi(information.at(0))]]->get_shelfLifeInDay();
+                            int *expirationList = new int[shelfLifeInDay];
+                            int index = 0;
+
+                            for (int j = 2; j < information.size(); j++)
+                            {
+                                expirationList[index] = stoi(information[j]);
+                                index++;
+                            }
+                            store.get_inventory()[itemsName[stoi(information.at(0))]]->set_expirationList(expirationList);
+
+                            delete[] expirationList;
+                        }
+                    }
+                }
+                ReadFile.close();
+            }
+        }
+
+        /* -----------------------------
+        -= Set-Up Store Data Variable =-
+        ----------------------------- */
+        double balance = store.get_balance();
+        double rating = store.get_rating();
+        double target = store.get_target();
+        int currentDay = store.get_currentDay();
+        int numCustomer = store.get_numCustomer();
 
         /* -------------------------
         -= User Store Purchasing =-
@@ -344,10 +373,14 @@ int main()
                 int choice;
                 while (true) // Progression option
                 {
-                    if (cin >> choice && (choice == 1 || choice == 2 || choice == 3))
+                    if (cin >> choice && ((choice == 1 || choice == 2) || (choice == 3)))
                     {
                         if (choice == 3)
                         {
+                            ofstream MyFile("data.txt");
+                            MyFile << 0 << endl; // Clear data.txt
+                            MyFile.close();
+
                             running = false;
                             restart = true;
                         }
