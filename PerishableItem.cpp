@@ -27,12 +27,11 @@ void PerishableItem::set_expirationList(int *expirationListTemp)
 }
 
 // Methods
-void PerishableItem::print() { return void(); }
-
+void PerishableItem::print() {}
 void PerishableItem::sellItem(int n)
 {
 
-    for (int i = 0; i < shelfLifeInDay; i++) // Loop through avaliable stock
+    for (int i = 0; i < shelfLifeInDay; i++) // Loop through available stock
     {
         if (n == 0)
         {
@@ -40,7 +39,7 @@ void PerishableItem::sellItem(int n)
         }
         if (n > expirationList[i]) // If amount to sell exceed stock with "i" days left till expire, sell all stock with that expiry date
         {
-            n -= expirationList[i]; // Reduce item to sell with avaliable stock for that expiry date
+            n -= expirationList[i]; // Reduce item to sell with available stock for that expiry date
             expirationList[i] = 0;
         }
         else

@@ -50,7 +50,7 @@ public:
 
     // Methods
     void change_numDifferentItem(int n); // Takes positive/negative value to adjust numDifferentItem variable ≠ Not setter
-    virtual void print();
+    virtual void print(); // Display a side-by-side table of Store Inventory & costList
 
     // Destructor
     ~StoreBase();
