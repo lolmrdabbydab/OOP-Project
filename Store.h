@@ -39,8 +39,8 @@ public:
     void set_target(double);
 
     // Methods
+    void print() override; // Display Store's Inventory & number of each Item owned
     void updateStore(); // Increment day, target, numCustomer & expirationList
-    void print() override;
 
     // Destructor
     ~Store();

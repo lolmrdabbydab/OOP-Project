@@ -30,7 +30,7 @@ public:
     void set_costList(double[10]);
 
     // Methods
-    void print() override;
+    void print() override; // Display Suppliant's Inventory & price for selling Item
     void updateCost(); // Update costList with randomized cost for items to sell
 
     // Destructor

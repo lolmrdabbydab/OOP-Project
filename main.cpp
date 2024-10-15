@@ -54,8 +54,8 @@ int main()
         ------------------------------- */
         string choice;
 
-        cout << "-= Welcome to The Retail Simulator Game =-" << endl;
-        cout << "Would you like to see the game introduction? (y/n): ";
+        cout << "\t\t\t\t------------=============== Welcome to The Retail Simulator Game ===============------------" << endl;
+        cout << "\nWould you like to see the game introduction? (y/n): ";
 
         // Error handling for user input
         while (!(cin >> choice) || (choice != "y" && choice != "n"))
@@ -67,10 +67,11 @@ int main()
 
         if (choice == "y")
         {
-            cout << "\nWelcome to the Retail Simulator Game!\n"
-                 << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
+            cout << "\n--------------------------------- Introduction -----------------------------------" << endl;
+            cout << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
                  << "Your goal is to maintain profitability and avoid bankruptcy!\n";
         }
+        cout << "----------------------------------------------------------------------------------\n" << endl;
 
         /* -------------------------
           -= Choosing Progression =-
@@ -95,7 +96,7 @@ int main()
             if (gameProgessChoice == 1)
             {
                 ofstream MyFile("data.txt"); // Ensure data.txt is available
-                MyFile << 0 << endl; // Ensure data.txt has default starting data
+                MyFile << 0 << endl;         // Ensure data.txt has default starting data
                 MyFile.close();
             }
             else if (gameProgessChoice == 2)
@@ -156,7 +157,6 @@ int main()
                         }
                         else // For Perishable Item
                         {
-
                             /* ----------------------------------------------------
                             -= Set-up Perishable Item's numItem & expirationList =-
                             ---------------------------------------------------- */
@@ -203,15 +203,27 @@ int main()
                  << endl;
             cout << "* Current Balance: $" << balance << endl;
             cout << "* Balance Target: $" << target << endl;
-            cout << "-------------------------------\n"
-                 << endl;
+            cout << "-------------------------------\n" << endl;
+
+            /* ---------------------------------
+            -= Show Inventory Post-Purchase =-
+            --------------------------------- */
+
+            cout << "\n" << endl;
+            store.print();
+
+            /* -----------------------
+            -= Show Suppliant Shop =-
+            ----------------------- */
 
             double *costList = new double[10];
+
             for (int j = 0; j < 10; j++)
             {
                 costList[j] = suppliant.get_costList()[j];
             }
-            cout << "-----> Buying goods for day " << currentDay << " <-----" << endl;
+            
+            cout << "\n\n-----> Buying goods for day " << currentDay << " <-----" << endl;
             suppliant.print();
 
             /* -------------------------
@@ -299,15 +311,13 @@ int main()
 
             sleep(2);
 
-            /* -------------------------
-            -= Randomise Purchase =-
-            ------------------------- */
+            /* ----------------------------
+                -= Randomise Purchase =-
+            ---------------------------- */
             for (int i = 0; i < numCustomer; i++)
             {
                 int good = rand() % 10;                   // Randomise Good (Index)
                 int numGoodBuy = rand() % currentDay + 1; // Randomise Amount of Good to Buy
-
-                cout << "\n----> Customer (" << i + 1 << ") want to buy \"" << numGoodBuy << " " << suppliant.get_itemNames()[good] << "\"" << endl;
 
                 /* ------------------------------------------
                 -= Update Inventory & Rating after Purchase =-
@@ -319,6 +329,7 @@ int main()
                 {
                     Item *item = itr->second;
                     int availableItems = item->get_numItem();
+                    double tempRating = rating;
 
                     if (availableItems >= numGoodBuy) // If there's enough goods in stock
                     {
@@ -326,14 +337,20 @@ int main()
                         item->change_numItem(-numGoodBuy);
                         item->sellItem(numGoodBuy);
                         rating = min(rating + 0.3, 5.0); // Ensure rating doesn't exceed 5
+
+                        cout << "\n----> Customer (" << i + 1 << ") bought " << numGoodBuy << " \"" << suppliant.get_itemNames()[good] << "\"" << endl;
+                        cout << "\t----> Rating increased from: " << tempRating << " -> " << rating << " stars" << endl;
                     }
                     else // If there's not enough goods in stock
                     {
                         rating -= 0.5 * (numGoodBuy - availableItems); // Rating drop -> 0.5 * amount of unavaliable goods
                         rating = max(rating, 0.0);                     // Ensure rating doesn't drop below 0
                         balance += availableItems * item->get_price();
-                        item->sellItem(item->get_numItem()); // Sell all avaliable stock
+                        item->sellItem(item->get_numItem()); // Sell all available stock
                         item->set_numItem(0);
+
+                        cout << "\n----> Customer (" << i + 1 << ") wanted to buy " << numGoodBuy << " \"" << suppliant.get_itemNames()[good] << "\" but there were " << availableItems << " in stock" << endl;
+                        cout << "\t----> Rating decreased from: " << tempRating << " -> " << rating << " stars" << endl;
                     }
                 }
 
