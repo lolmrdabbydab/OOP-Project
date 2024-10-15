@@ -6,6 +6,7 @@
 #include <ctime>
 #include <vector>
 #include <map>
+#include <set>
 #include <iomanip>
 
 #include "Printable.h"
@@ -76,28 +77,29 @@ int main()
 
         if (!restart) // If user has previously chosen to start new game
         {
-            int gameProgessChoice;
+            string input;
 
             cout << "Would you like to:\n";
             cout << "\t1. Start a new game\n";
             cout << "\t2. Continue from where you left off\n";
             cout << "Enter your choice (1 or 2): ";
 
-            // Error handling for user input
-            while (!(cin >> gameProgessChoice) || (gameProgessChoice != 1 && gameProgessChoice != 2))
+            while (cin >> input && (input != "1" && input != "2"))
             {
-                cout << "Invalid input. Please enter '1' to start a new game or '2' to continue: ";
+                cout << "Invalid input. Please enter (1 or 2): ";
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
 
-            if (gameProgessChoice == 1)
+            int gameProgressChoice = stoi(input);
+            
+            if (gameProgressChoice == 1)
             {
                 ofstream MyFile("data.txt"); // Ensure data.txt is available
                 MyFile << 0 << endl;         // Ensure data.txt has default starting data
                 MyFile.close();
             }
-            else if (gameProgessChoice == 2)
+            else if (gameProgressChoice == 2)
             {
                 /* -------------------------
                 -= Read & Use Data.txt File =-
@@ -236,20 +238,26 @@ int main()
                     -= Choosing Item =-
                 ------------------------- */
 
-                int itemNum;
+                set<string> validInputs = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "n"};
+                string input;
 
                 while (true)
                 {
-                    cout << "\n\nPlease choose items to buy (1-10) (Enter any other number to stop purchase): ";
-
-                    while (!(cin >> itemNum)) // Ask until int input
+                    cout << "\n\nPlease choose items to buy (1-10) (Enter 'n' to stop purchase): ";
+                    while (true) // Ask until string input from 1-10 or n
                     {
-                        cout << "Invalid input type. Please enter an integer from (1-10): ";
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cin >> input;
+                        if (validInputs.find(input) == validInputs.end())
+                        {
+                            cout << "Invalid input. Please enter a number between 1 and 10: ";
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
 
-                    if (itemNum < 1 || itemNum > 10) // Check if user didn't have any purchases
+                    if (input == "n") // Check if user didn't have any purchases
                     {
                         if (countPurchase == 0)
                         {
@@ -282,6 +290,7 @@ int main()
                     -= Choosing Item Amount =-
                     ------------------------- */
 
+                    int itemNum = stoi(input);
                     int itemIndex = itemNum - 1;
                     int amount;
                     cout << "Amount: ";
