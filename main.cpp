@@ -33,16 +33,10 @@ int main()
         ------------------------- */
         Suppliant suppliant = Suppliant();
         string *itemsName = new string[10];
-        double *costList = new double[10];
-
-        itemsName = suppliant.get_itemNames();
-        costList = suppliant.get_costList();
-        
-        // for (int j = 0; j < 10; j++)
-        // {
-        //     itemsName[j] = suppliant.get_itemNames()[j];
-            // costList[j] = suppliant.get_costList()[j]; // Update costList with randomized cost based on costRefList
-        // }
+        for (int j = 0; j < 10; j++)
+        {
+            itemsName[j] = suppliant.get_itemNames()[j];
+        }
 
         /* -------------------------
             -= Set-up Store =-
@@ -77,8 +71,7 @@ int main()
             cout << "In this game, you will manage a store, purchase stock, and keep customers happy.\n"
                  << "Your goal is to maintain profitability and avoid bankruptcy!\n";
         }
-        cout << "----------------------------------------------------------------------------------\n"
-             << endl;
+        cout << "----------------------------------------------------------------------------------\n" << endl;
 
         /* -------------------------
           -= Choosing Progression =-
@@ -205,23 +198,27 @@ int main()
         {
             srand(time(nullptr)); // Randomize Time
 
+            double *costList = new double[10];
+
+            for (int j = 0; j < 10; j++)
+            {
+                costList[j] = suppliant.get_costList()[j]; // Update costList with randomized cost based on costRefList
+            }
+
             cout << "\n-------------------------------" << endl;
             cout << "\tWelcome to day " << currentDay << endl;
             cout << "-------------------------------\n"
                  << endl;
             cout << "* Current Balance: $" << balance << endl;
             cout << "* Balance Target: $" << target << endl;
-            cout << "-------------------------------\n"
-                 << endl;
+            cout << "-------------------------------\n" << endl;
 
             /* -----------------------------------
             -= Show Inventory & Suppliant Shop =-
             ----------------------------------- */
-
-            cout << "\n"
-                 << endl;
-
+            
             cout << "\n\n-----> Buying goods for day " << currentDay << " <-----" << endl;
+            
             suppliant.print();
 
             /* -------------------------
@@ -296,8 +293,7 @@ int main()
             /* ---------------------------------
             -= Show Inventory Post-Purchase =-
             --------------------------------- */
-            cout << "\n"
-                 << endl;
+            cout << "\n" << endl;
             store.print();
 
             /* -------------------------
@@ -422,6 +418,7 @@ int main()
                 store.updateStore();
                 store.set_balance(balance);
                 store.set_rating(rating);
+                delete[] costList;
                 currentDay += 1;
                 target += currentDay + 5 * (currentDay / 5);
 
@@ -491,7 +488,6 @@ int main()
                 }
             }
         }
-        delete[] costList;
         delete[] itemsName;
     } while (restart);
 
