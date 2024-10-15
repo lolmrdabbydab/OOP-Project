@@ -44,7 +44,17 @@ void Store::updateStore()
 }
 
 // Methods
-void Store::print() {}
+void Store::print()
+{
+    cout << "************************************" << endl;
+    cout << "\t Store's Inventory" << endl;
+    cout << "************************************\n" << endl;
+    for (int i = 0; i < StoreBase::get_numDifferentItem(); i++)
+    {
+        cout << i + 1 << ". " << itemNames[i] << ": x" << get_inventory()[itemNames[i]]->get_numItem() << endl;
+    }
+    cout << "\n************************************\n" << endl;
+}
 
 // Destructor
 Store::~Store() {}
